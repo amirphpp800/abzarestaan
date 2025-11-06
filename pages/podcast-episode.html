@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">اپیزود - پادکست لایه هفتم</title>
+    <meta name="description" content="پادکست لایه هفتم">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/pwa/manifest.json">
+    <meta name="theme-color" content="#9D0913">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/Font/fontiran.css">
+    <link rel="stylesheet" href="../css/loading.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .episode-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .episode-header {
+            background: rgba(8, 8, 8, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 2rem;
+            margin-bottom: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: none;
+        }
+
+        .episode-header-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .episode-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .episode-cover-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .episode-cover-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        .episode-title {
+            font-size: 1.6rem;
+            color: white;
+            margin-bottom: 0;
+            line-height: 1.6;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .episode-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 0;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .meta-item svg {
+            color: rgba(255, 140, 0, 0.7);
+            width: 16px;
+            height: 16px;
+        }
+
+        .audio-player {
+            background: linear-gradient(135deg, rgba(40, 50, 60, 0.95) 0%, rgba(30, 40, 50, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-player::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50"><path d="M0 25 Q 10 15, 20 25 T 40 25 T 60 25 T 80 25 T 100 25 T 120 25 T 140 25 T 160 25 T 180 25 T 200 25" stroke="rgba(255,255,255,0.05)" fill="none" stroke-width="2"/></svg>') repeat-x;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            height: 70px;
+            outline: none;
+            background: transparent;
+        }
+
+        .audio-player audio::-webkit-media-controls-enclosure {
+            background: rgba(40, 50, 60, 0.9);
+            border-radius: 12px;
+        }
+
+        .audio-player audio::-webkit-media-controls-panel {
+            background: rgba(40, 50, 60, 0.9);
+            border-radius: 12px;
+        }
+
+        .audio-player audio::-webkit-media-controls-play-button {
+            background-color: transparent;
+            border-radius: 50%;
+            filter: brightness(1.2);
+        }
+
+        .audio-player audio::-webkit-media-controls-current-time-display,
+        .audio-player audio::-webkit-media-controls-time-remaining-display {
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .audio-player audio::-webkit-media-controls-timeline {
+            background: rgba(100, 120, 140, 0.4);
+            border-radius: 25px;
+            margin: 0 10px;
+            height: 6px;
+        }
+
+        .audio-player audio::-webkit-media-controls-volume-slider {
+            background: rgba(100, 120, 140, 0.4);
+            border-radius: 25px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .player-icon {
+            display: none;
+        }
+
+        .player-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 8px;
+            z-index: 2;
+        }
+
+        .player-icon svg {
+            width: 28px;
+            height: 28px;
+            color: rgba(255, 140, 0, 0.9);
+            z-index: 1;
+        }
+
+    .player-details {
+        flex: 1;
+    }
+
+    .player-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.35rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .player-subtitle {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
+    }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.1rem 2rem;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 2rem auto 0;
+            width: 100%;
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(220, 38, 38, 0.6);
+            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+        }
+
+        .episode-content {
+            background: #161617;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-top: none;
+        }
+
+        .episode-content h2 {
+            font-size: 1.75rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .episode-content h3 {
+            font-size: 1.4rem;
+            color: white;
+            margin: 2rem 0 1rem;
+        }
+
+        .episode-content p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 2;
+            margin-bottom: 1.5rem;
+        }
+
+        .episode-content ul,
+        .episode-content ol {
+            margin-right: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .episode-content li {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+
+        .episode-content blockquote {
+            border-right: 4px solid #ff8c00;
+            padding-right: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .share-section {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .share-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 140, 0, 0.2);
+            border-color: #ff8c00;
+            transform: translateY(-2px);
+        }
+
+        .other-episodes-section {
+            background: rgba(8, 8, 8, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .other-episodes-section h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .other-episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .other-episode-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .other-episode-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 140, 0, 0.3);
+            box-shadow: 0 8px 24px rgba(255, 140, 0, 0.15);
+        }
+
+        .other-episode-thumbnail {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        .other-episode-info {
+            padding: 1rem;
+        }
+
+        .other-episode-title {
+            font-size: 0.9rem;
+            color: white;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .other-episode-duration {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .other-episode-duration svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 968px) {
+            .episode-header-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .episode-cover-section {
+                order: -1;
+                max-width: 350px;
+                margin: 0 auto 1.5rem auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .episode-container {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .episode-header {
+                padding: 1.5rem 1rem;
+                border-radius: 24px;
+                margin-bottom: 0;
+            }
+
+            .episode-header-content {
+                gap: 1.25rem;
+            }
+
+            .back-link {
+                margin-bottom: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .episode-info-section {
+                gap: 1rem;
+            }
+
+            .episode-title {
+                font-size: 1.2rem;
+                text-align: center;
+                line-height: 1.5;
+            }
+
+            .episode-meta {
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .audio-player {
+                padding: 1.25rem;
+            }
+
+            .episode-content {
+                padding: 1.5rem 1rem;
+                border-radius: 24px;
+            }
+
+            .episode-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .episode-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .episode-content p {
+                font-size: 0.95rem;
+            }
+
+            .other-episodes-section {
+                padding: 1.5rem 1rem;
+                border-radius: 20px;
+            }
+
+            .other-episodes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .download-btn {
+                padding: 1rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .share-section {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-right">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    <nav class="main-nav" id="mainNav">
+                        <a href="../index.html" class="nav-item">خانه</a>
+                        <a href="tools.html" class="nav-item">ابزارها</a>
+                        <a href="articles.html" class="nav-item">یادداشت‌ها</a>
+                        <a href="podcasts.html" class="nav-item">پادکست‌ها</a>
+                        <a href="about.html" class="nav-item">درباره</a>
+                    </nav>
+                </div>
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.75rem;">
+                            <span class="logo-text">ابزارستان</span>
+                            <img src="../assets/logo/logo.svg" alt="ابزارستان" class="logo-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="episode-container">
+                <!-- Episode Header -->
+                <div class="episode-header">
+                    <a href="podcast-layeh7.html" class="back-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        بازگشت به لیست اپیزودها
+                    </a>
+
+                    <div class="episode-header-content">
+                        <!-- Left Section: Info -->
+                        <div class="episode-info-section">
+                            <h1 id="episodeTitle" class="episode-title"></h1>
+
+                            <div class="episode-meta">
+                                <div class="meta-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <span id="episodeDate"></span>
+                                </div>
+                                <div class="meta-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <span id="episodeDuration"></span>
+                                </div>
+                            </div>
+
+                            <div class="audio-player">
+                            <div class="player-info">
+                                <div class="player-icon">
+                                    <svg id="playerIconFallback" viewBox="0 0 24 24" fill="currentColor" style="display: block;">
+                                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                        <line x1="12" y1="19" x2="12" y2="23" stroke="currentColor" stroke-width="2"></line>
+                                        <line x1="8" y1="23" x2="16" y2="23" stroke="currentColor" stroke-width="2"></line>
+                                    </svg>
+                                    <img id="playerCover" alt="Episode Cover" style="display: none;">
+                                </div>
+                                <div class="player-details">
+                                    <div class="player-title">پادکست لایه هفتم</div>
+                                    <div class="player-subtitle" id="playerSubtitle">در حال بارگذاری...</div>
+                                </div>
+                            </div>
+                            <audio id="audioPlayer" controls>
+                                <source id="audioSource" src="" type="audio/mpeg">
+                                مرورگر شما از پخش صوت پشتیبانی نمی‌کند.
+                            </audio>
+                        </div>
+
+                        <a id="downloadBtn" href="#" class="download-btn" style="display: none;" download>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            دانلود فایل صوتی
+                        </a>
+                        </div>
+
+                        <!-- Right Section: Cover Image -->
+                        <div class="episode-cover-section">
+                            <img id="episodeCoverMain" class="episode-cover-image" alt="Episode Cover">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Episode Content -->
+                <div class="episode-content" id="episodeContent">
+                    <!-- Content will be loaded here -->
+                </div>
+
+                <!-- Other Episodes Section -->
+                <div class="other-episodes-section">
+                    <h3>اپیزودهای دیگر</h3>
+                    <div class="other-episodes-grid" id="otherEpisodesList">
+                        <!-- Other episodes will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Share Section -->
+                <div class="share-section">
+                    <h3>اشتراک‌گذاری این اپیزود</h3>
+                    <div class="share-buttons">
+                        <button class="share-btn" onclick="shareOnTwitter()" title="Twitter">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" onclick="shareOnTelegram()" title="Telegram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"></path>
+                            </svg>
+                        </button>
+                        <button class="share-btn" onclick="copyLink()" title="کپی لینک">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ابـزارستـان</h4>
+                    <p>پلتفرمی برای به اشتراک‌گذاری دانش و ابزارهای کاربردی</p>
+                    <div class="social-media">
+                        <h5>سوشـال مدیـا</h5>
+                        <div class="social-links">
+                            <a href="https://t.me/iEnuma" class="social-link" aria-label="Telegram" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="X (Twitter)" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="YouTube" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>دسترسی سریع</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">خانه</a></li>
+                        <li><a href="tools.html">ابزارها</a></li>
+                        <li><a href="articles.html">یادداشت‌ها</a></li>
+                        <li><a href="podcasts.html">پادکست‌ها</a></li>
+                        <li><a href="about.html">درباره ما</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>ارتباط با ما</h4>
+                    <div class="contact-info">
+                        <a href="mailto:abzarestan@proton.me" class="contact-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>abzarestan@proton.me</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ۱۴۰۴ ابـزارستـان. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/loading.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/auto-optimize.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+    <script src="../pwa/pwa-init.js"></script>
+    <script src="podcast-data.js"></script>
+</body>
+</html>

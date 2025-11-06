@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت فایل‌ها - پنل مدیریت</title>
+    <link rel="stylesheet" href="../assets/Font/fontiran.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .upload-section {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-area.dragover {
+            border-color: #9D0913;
+            background: rgba(157, 9, 19, 0.1);
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .upload-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .file-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .file-type-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'IRANSans', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-type-btn.active {
+            background: rgba(157, 9, 19, 0.2);
+            border-color: #9D0913;
+            color: white;
+        }
+
+        .upload-progress {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #9D0913, #c70812);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .file-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .file-card:hover {
+            border-color: rgba(157, 9, 19, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .file-preview {
+            width: 100%;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .file-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        .file-preview svg {
+            width: 60px;
+            height: 60px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .file-info {
+            margin-bottom: 1rem;
+        }
+
+        .file-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+
+        .file-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-copy {
+            flex: 1;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #9D0913 0%, #c70812 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'IRANSans', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(157, 9, 19, 0.4);
+        }
+
+        .btn-delete {
+            padding: 0.75rem 1rem;
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            color: #ef4444;
+            font-family: 'IRANSans', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background: rgba(220, 38, 38, 0.2);
+        }
+
+        .link-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .link-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .link-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: 'IRANSans', sans-serif;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="admin-logo">
+                    <span class="logo-icon">📊</span>
+                    <span class="logo-text">پنل مدیریت</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">داشبورد</span>
+                </a>
+                <a href="articles.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">مقالات</span>
+                </a>
+                <a href="add-article.html" class="nav-item">
+                    <span class="nav-icon">➕</span>
+                    <span class="nav-text">افزودن مقاله</span>
+                </a>
+                <a href="templates.html" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">تمپلیت‌ها</span>
+                </a>
+                <a href="media.html" class="nav-item active">
+                    <span class="nav-icon">🖼️</span>
+                    <span class="nav-text">رسانه‌ها</span>
+                </a>
+                <a href="../index.html" class="nav-item" target="_blank">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-text">مشاهده سایت</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <span>🚪</span>
+                    خروج
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>مدیریت فایل‌ها</h1>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Stats -->
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalFiles">0</div>
+                        <div class="stat-label">کل فایل‌ها</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalSize">0 MB</div>
+                        <div class="stat-label">حجم کل</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="audioFiles">0</div>
+                        <div class="stat-label">فایل‌های صوتی</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="toolFiles">0</div>
+                        <div class="stat-label">فایل‌های ابزار</div>
+                    </div>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <h2 style="color: white; margin-bottom: 1.5rem;">آپلود فایل جدید</h2>
+                    
+                    <div class="file-type-selector">
+                        <button class="file-type-btn active" data-type="tool">فایل ابزار</button>
+                        <button class="file-type-btn" data-type="podcast">فایل پادکست</button>
+                        <button class="file-type-btn" data-type="other">سایر فایل‌ها</button>
+                    </div>
+
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="fileInput" multiple>
+                        <div class="upload-icon">📁</div>
+                        <div class="upload-text">فایل‌ها را اینجا بکشید یا کلیک کنید</div>
+                        <div class="upload-hint">بدون محدودیت حجم - تمام فرمت‌ها پشتیبانی می‌شوند</div>
+                    </div>
+
+                    <div class="upload-progress" id="uploadProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text" id="progressText">در حال آپلود...</div>
+                    </div>
+                </div>
+
+                <!-- Files Grid -->
+                <div class="dashboard-section">
+                    <h2>فایل‌های آپلود شده</h2>
+                    <div class="files-grid" id="filesGrid">
+                        <!-- Files will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Link Modal -->
+    <div class="link-modal" id="linkModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>لینک دانلود مستقیم</h3>
+                <button class="modal-close" onclick="closeLinkModal()">✕</button>
+            </div>
+            <input type="text" class="link-input" id="linkInput" readonly>
+            <div class="modal-actions">
+                <button class="btn-copy" onclick="copyDirectLink()">کپی لینک</button>
+                <button class="btn-secondary" onclick="closeLinkModal()">بستن</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="kv-storage.js"></script>
+    <script src="admin-auth.js"></script>
+    <script src="media-manager.js"></script>
+</body>
+</html>

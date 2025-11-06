@@ -13,7 +13,7 @@ const articlesData = [
         date: '۱۸ آبان ۱۴۰۳',
         readingTime: '25',
         image: '../assets/images/ai.png',
-        tags: ['هوش مصنوعی', 'سیاست', 'امنیت ملی', 'سند ملی']
+        tags: ['هوش مصنوعی', 'سیاست', 'اینترنت']
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ const articlesData = [
         date: '۱۳ آبان ۱۴۰۳',
         readingTime: '15',
         image: '../assets/images/sms.png',
-        tags: ['سانسور', 'پیامک', 'فیلترینگ', 'پیک‌آسا']
+        tags: ['سانسور', 'پیامک', 'فیلترینگ', 'اینترنت']
     }
 ];
 
@@ -86,7 +86,7 @@ function createArticleCard(article) {
                     </span>
                 </div>
                 <div class="article-card-tags">
-                    ${article.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                    ${article.tags.slice(0, 4).map(tag => `<span class="tag">#${tag}</span>`).join('')}
                 </div>
             </div>
         </a>

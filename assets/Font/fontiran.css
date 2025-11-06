@@ -18,121 +18,121 @@ This set of fonts are used in this project under the license: (.....)
 **/
 
 @font-face {
-	font-family: AbarLow;
+	font-family: AbarLowFaNum;
 	font-style: normal;
 	font-weight: normal;
-	src: url('woff/AbarLow-Regular.woff') format('woff'),   
-	url('woff2/AbarLow-Regular.woff2') format('woff2');		 	 
+	src: url('woff/AbarLowFaNum-Regular.woff') format('woff'),   
+	url('woff2/AbarLowFaNum-Regular.woff2') format('woff2');		 	 
 }
 
 @font-face {
-	font-family: AbarLow;
+	font-family: AbarLowFaNum;
 	font-style: normal;
 	font-weight: 600;
-	src: url('woff/AbarLow-SemiBold.woff') format('woff'),   
-	url('woff2/AbarLow-SemiBold.woff2') format('woff2');		 
+	src: url('woff/AbarLowFaNum-SemiBold.woff') format('woff'),   
+	url('woff2/AbarLowFaNum-SemiBold.woff2') format('woff2');		 
 }
 
 @font-face {
-	font-family: AbarLow;
+	font-family: AbarLowFaNum;
 	font-style: normal;
 	font-weight: bold;
-	src: url('woff/AbarLow-Bold.woff') format('woff'),   
-	url('woff2/AbarLow-Bold.woff2') format('woff2'); 
+	src: url('woff/AbarLowFaNum-Bold.woff') format('woff'),   
+	url('woff2/AbarLowFaNum-Bold.woff2') format('woff2'); 
 }
 
 @font-face {
-	font-family: AbarLow;
+	font-family: AbarLowFaNum;
 	font-style: normal;
 	font-weight: 800;
-	src: url('woff/AbarLow-ExtraBold.woff') format('woff'),   
-	url('woff2/AbarLow-ExtraBold.woff2') format('woff2'); 
+	src: url('woff/AbarLowFaNum-ExtraBold.woff') format('woff'),   
+	url('woff2/AbarLowFaNum-ExtraBold.woff2') format('woff2'); 
 }
 
 @font-face {
-	font-family: AbarLow;
+	font-family: AbarLowFaNum;
 	font-style: normal;
 	font-weight: 900;
-	src: url('woff/AbarLow-Black.woff') format('woff'),   
-	url('woff2/AbarLow-Black.woff2') format('woff2');		 
+	src: url('woff/AbarLowFaNum-Black.woff') format('woff'),   
+	url('woff2/AbarLowFaNum-Black.woff2') format('woff2');		 
 }
 
 @font-face {
-	font-family: AbarMid;
+	font-family: AbarMidFaNum;
 	font-style: normal;
 	font-weight: normal;
-	src: url('woff/AbarMid-Regular.woff') format('woff'),   
-	url('woff2/AbarMid-Regular.woff2') format('woff2');		 	 
+	src: url('woff/AbarMidFaNum-Regular.woff') format('woff'),   
+	url('woff2/AbarMidFaNum-Regular.woff2') format('woff2');		 	 
 }
 
 @font-face {
-	font-family: AbarMid;
+	font-family: AbarMidFaNum;
 	font-style: normal;
 	font-weight: 600;
-	src: url('woff/AbarMid-SemiBold.woff') format('woff'),   
-	url('woff2/AbarMid-SemiBold.woff2') format('woff2');		 
+	src: url('woff/AbarMidFaNum-SemiBold.woff') format('woff'),   
+	url('woff2/AbarMidFaNum-SemiBold.woff2') format('woff2');		 
 }
 
 @font-face {
-	font-family: AbarMid;
+	font-family: AbarMidFaNum;
 	font-style: normal;
 	font-weight: bold;
-	src: url('woff/AbarMid-Bold.woff') format('woff'),   
-	url('woff2/AbarMid-Bold.woff2') format('woff2'); 
+	src: url('woff/AbarMidFaNum-Bold.woff') format('woff'),   
+	url('woff2/AbarMidFaNum-Bold.woff2') format('woff2'); 
 }
 
 @font-face {
-	font-family: AbarMid;
+	font-family: AbarMidFaNum;
 	font-style: normal;
 	font-weight: 800;
-	src: url('woff/AbarMid-ExtraBold.woff') format('woff'),   
-	url('woff2/AbarMid-ExtraBold.woff2') format('woff2'); 
+	src: url('woff/AbarMidFaNum-ExtraBold.woff') format('woff'),   
+	url('woff2/AbarMidFaNum-ExtraBold.woff2') format('woff2'); 
 }
 
 @font-face {
-	font-family: AbarMid;
+	font-family: AbarMidFaNum;
 	font-style: normal;
 	font-weight: 900;
-	src: url('woff/AbarMid-Black.woff') format('woff'),   
-	url('woff2/AbarMid-Black.woff2') format('woff2');		 
+	src: url('woff/AbarMidFaNum-Black.woff') format('woff'),   
+	url('woff2/AbarMidFaNum-Black.woff2') format('woff2');		 
 }
 
 @font-face {
-	font-family: AbarHigh;
+	font-family: AbarHighFaNum;
 	font-style: normal;
 	font-weight: normal;
-	src: url('woff/AbarHigh-Regular.woff') format('woff'),   
-	url('woff2/AbarHigh-Regular.woff2') format('woff2');		 	 
+	src: url('woff/AbarHighFaNum-Regular.woff') format('woff'),   
+	url('woff2/AbarHighFaNum-Regular.woff2') format('woff2');		 	 
 }
 
 @font-face {
-	font-family: AbarHigh;
+	font-family: AbarHighFaNum;
 	font-style: normal;
 	font-weight: 600;
-	src: url('woff/AbarHigh-SemiBold.woff') format('woff'),   
-	url('woff2/AbarHigh-SemiBold.woff2') format('woff2');		 
+	src: url('woff/AbarHighFaNum-SemiBold.woff') format('woff'),   
+	url('woff2/AbarHighFaNum-SemiBold.woff2') format('woff2');		 
 }
 
 @font-face {
-	font-family: AbarHigh;
+	font-family: AbarHighFaNum;
 	font-style: normal;
 	font-weight: bold;
-	src: url('woff/AbarHigh-Bold.woff') format('woff'),   
-	url('woff2/AbarHigh-Bold.woff2') format('woff2'); 
+	src: url('woff/AbarHighFaNum-Bold.woff') format('woff'),   
+	url('woff2/AbarHighFaNum-Bold.woff2') format('woff2'); 
 }
 
 @font-face {
-	font-family: AbarHigh;
+	font-family: AbarHighFaNum;
 	font-style: normal;
 	font-weight: 800;
-	src: url('woff/AbarHigh-ExtraBold.woff') format('woff'),   
-	url('woff2/AbarHigh-ExtraBold.woff2') format('woff2'); 
+	src: url('woff/AbarHighFaNum-ExtraBold.woff') format('woff'),   
+	url('woff2/AbarHighFaNum-ExtraBold.woff2') format('woff2'); 
 }
 
 @font-face {
-	font-family: AbarHigh;
+	font-family: AbarHighFaNum;
 	font-style: normal;
 	font-weight: 900;
-	src: url('woff/AbarHigh-Black.woff') format('woff'),   
-	url('woff2/AbarHigh-Black.woff2') format('woff2');		 
+	src: url('woff/AbarHighFaNum-Black.woff') format('woff'),   
+	url('woff2/AbarHighFaNum-Black.woff2') format('woff2');		 
 }

@@ -30,10 +30,93 @@
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
+
+    /* Tool Cards Mobile */
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tool-card {
+        padding: 1.5rem;
+    }
+
+    .tool-card .tool-icon,
+    .tools-logo {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: 0.875rem;
+    }
+
+    .tool-title {
+        font-size: 1rem;
+    }
+
+    .tool-platform {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .tool-features {
+        padding: 1.5rem;
+    }
+
+    .tool-download-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+    }
+
+    .tool-details-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+    }
+
+    .tool-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    /* Modal Mobile */
+    .modal-content {
+        padding: 2rem 1.5rem;
+        max-height: 90vh;
+        margin: 0 1rem;
+    }
+
+    .modal-close {
+        top: 0.75rem;
+        left: 0.75rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1.25rem;
+    }
+
+    .modal-header .modal-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .modal-features h3 {
+        font-size: 1.1rem;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
     
     .top-cards {
         grid-template-columns: 1fr;
         gap: 1rem;
+        margin-bottom: 1.5rem;
+        order: 1;
     }
     
     .feature-card {
@@ -42,6 +125,11 @@
         min-height: 140px;
         gap: 1rem;
         padding: 1.5rem;
+    }
+    
+    .main-sidebar {
+        order: 2;
+        margin-bottom: 1.5rem;
     }
 
     .card-btn {
@@ -147,6 +235,89 @@
     
     .main-wrapper {
         padding: 1rem 0;
+    }
+
+    /* Tool Cards Small Mobile */
+    .tools-grid {
+        gap: 1rem;
+    }
+
+    .tool-card {
+        padding: 1.25rem;
+    }
+
+    .tool-card .tool-icon,
+    .tools-logo {
+        width: 55px;
+        height: 55px;
+        font-size: 1.875rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .tool-title {
+        font-size: 0.95rem;
+    }
+
+    .tool-description {
+        font-size: 0.8rem;
+    }
+
+    .tool-platform {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.65rem;
+    }
+
+    .tool-platform svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .tool-features {
+        padding: 1rem;
+    }
+
+    .tool-features h4 {
+        font-size: 1rem;
+    }
+
+    .feature-item strong {
+        font-size: 0.9rem;
+    }
+
+    .tool-features li {
+        font-size: 0.85rem;
+    }
+
+    /* Modal Small Mobile */
+    .modal-content {
+        padding: 1.5rem 1rem;
+        border-radius: 15px;
+    }
+
+    .modal-header {
+        padding-bottom: 1rem;
+    }
+
+    .modal-header .modal-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.75rem;
+    }
+
+    .modal-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .modal-header p {
+        font-size: 0.85rem;
+    }
+
+    .modal-features h3 {
+        font-size: 1rem;
+    }
+
+    .feature-item strong {
+        font-size: 0.85rem;
     }
     
     .nav-link {

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>افزودن مقاله - پنل مدیریت</title>
+    <link rel="stylesheet" href="../assets/Font/fontiran.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="editor-style.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="admin-logo">
+                    <span class="logo-icon">📊</span>
+                    <span class="logo-text">پنل مدیریت</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">داشبورد</span>
+                </a>
+                <a href="articles.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">مقالات</span>
+                </a>
+                <a href="add-article.html" class="nav-item active">
+                    <span class="nav-icon">➕</span>
+                    <span class="nav-text">افزودن مقاله</span>
+                </a>
+                <a href="templates.html" class="nav-item">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">تمپلیت‌ها</span>
+                </a>
+                <a href="media.html" class="nav-item">
+                    <span class="nav-icon">🖼️</span>
+                    <span class="nav-text">رسانه‌ها</span>
+                </a>
+                <a href="../index.html" class="nav-item" target="_blank">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-text">مشاهده سایت</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <span>🚪</span>
+                    خروج
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="pageTitle">افزودن مقاله جدید</h1>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="loadTemplate()">📋 استفاده از تمپلیت</button>
+                    <button class="btn-secondary" onclick="togglePreview()">👁️ پیش‌نمایش</button>
+                </div>
+            </header>
+
+            <div class="editor-container">
+                <div class="editor-main">
+                    <!-- Article Form -->
+                    <div class="editor-section">
+                        <div class="form-group">
+                            <label for="articleTitle">عنوان مقاله *</label>
+                            <input type="text" id="articleTitle" placeholder="عنوان مقاله را وارد کنید..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="articleSlug">نامک (Slug)</label>
+                            <input type="text" id="articleSlug" placeholder="article-slug" dir="ltr">
+                            <small>خودکار از عنوان ایجاد می‌شود</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="articleCategory">دسته‌بندی *</label>
+                                <select id="articleCategory" required>
+                                    <option value="">انتخاب کنید...</option>
+                                    <option value="security">امنیت سایبری</option>
+                                    <option value="privacy">حریم خصوصی</option>
+                                    <option value="technology">فناوری</option>
+                                    <option value="tools">ابزارها</option>
+                                    <option value="tutorials">آموزش</option>
+                                    <option value="news">اخبار</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="articleAuthor">نویسنده</label>
+                                <input type="text" id="articleAuthor" value="ابزارستان">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="articleExcerpt">خلاصه مقاله</label>
+                            <textarea id="articleExcerpt" rows="3" placeholder="خلاصه‌ای کوتاه از مقاله..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>تصویر کاور</label>
+                            <div class="cover-options">
+                                <div class="cover-tabs">
+                                    <button class="cover-tab active" data-tab="upload">آپلود تصویر</button>
+                                    <button class="cover-tab" data-tab="url">لینک تصویر</button>
+                                </div>
+                                
+                                <div class="cover-content">
+                                    <div class="cover-panel active" id="upload-panel">
+                                        <input type="file" id="coverUpload" accept="image/*" style="display: none;">
+                                        <button class="upload-btn" onclick="document.getElementById('coverUpload').click()">
+                                            📁 انتخاب فایل
+                                        </button>
+                                        <div id="coverPreview" class="cover-preview"></div>
+                                    </div>
+                                    
+                                    <div class="cover-panel" id="url-panel">
+                                        <input type="url" id="coverUrl" placeholder="https://example.com/image.jpg" dir="ltr">
+                                        <button class="btn-secondary" onclick="loadCoverFromUrl()">بارگذاری</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="articleTags">برچسب‌ها</label>
+                            <input type="text" id="articleTags" placeholder="برچسب‌ها را با کاما جدا کنید...">
+                            <small>مثال: امنیت, VPN, فیلترشکن</small>
+                        </div>
+                    </div>
+
+                    <!-- Editor Toolbar -->
+                    <div class="editor-section">
+                        <label>محتوای مقاله *</label>
+                        <div class="editor-toolbar">
+                            <button class="toolbar-btn" onclick="formatText('bold')" title="Bold">
+                                <strong>B</strong>
+                            </button>
+                            <button class="toolbar-btn" onclick="formatText('italic')" title="Italic">
+                                <em>I</em>
+                            </button>
+                            <button class="toolbar-btn" onclick="formatText('underline')" title="Underline">
+                                <u>U</u>
+                            </button>
+                            <span class="toolbar-divider"></span>
+                            <button class="toolbar-btn" onclick="insertHeading('h2')" title="Heading 2">
+                                H2
+                            </button>
+                            <button class="toolbar-btn" onclick="insertHeading('h3')" title="Heading 3">
+                                H3
+                            </button>
+                            <span class="toolbar-divider"></span>
+                            <button class="toolbar-btn" onclick="insertList('ul')" title="Bullet List">
+                                ☰
+                            </button>
+                            <button class="toolbar-btn" onclick="insertList('ol')" title="Numbered List">
+                                ≡
+                            </button>
+                            <span class="toolbar-divider"></span>
+                            <button class="toolbar-btn" onclick="insertLink()" title="Insert Link">
+                                🔗
+                            </button>
+                            <button class="toolbar-btn" onclick="insertImage()" title="Insert Image">
+                                🖼️
+                            </button>
+                            <button class="toolbar-btn" onclick="insertCode()" title="Code Block">
+                                &lt;/&gt;
+                            </button>
+                            <span class="toolbar-divider"></span>
+                            <button class="toolbar-btn" onclick="insertQuote()" title="Quote">
+                                "
+                            </button>
+                            <button class="toolbar-btn" onclick="insertDivider()" title="Divider">
+                                ―
+                            </button>
+                        </div>
+
+                        <div id="articleEditor" class="article-editor" contenteditable="true" placeholder="محتوای مقاله را اینجا بنویسید...">
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="editor-actions">
+                        <button class="btn-primary" onclick="saveArticleForm('published')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            انتشار مقاله
+                        </button>
+                        <button class="btn-secondary" onclick="saveArticleForm('draft')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                            ذخیره پیش‌نویس
+                        </button>
+                        <button class="btn-secondary" onclick="window.location.href='articles.html'">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-left: 0.5rem;">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                            انصراف
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="preview-panel" id="previewPanel">
+                    <div class="preview-header">
+                        <h3>پیش‌نمایش</h3>
+                        <button class="btn-icon" onclick="togglePreview()">✕</button>
+                    </div>
+                    <div class="preview-content" id="previewContent">
+                        <div class="preview-article">
+                            <h1 id="previewTitle">عنوان مقاله</h1>
+                            <div class="preview-meta">
+                                <span id="previewAuthor">نویسنده</span>
+                                <span id="previewDate"></span>
+                            </div>
+                            <img id="previewCover" src="" alt="" style="display: none;">
+                            <div id="previewBody" class="preview-body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="kv-storage.js"></script>
+    <script src="admin-auth.js"></script>
+    <script src="article-editor.js"></script>
+</body>
+</html>

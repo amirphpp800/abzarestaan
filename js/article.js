@@ -53,7 +53,7 @@ async function loadArticle(articleId) {
             date: articleElement.getAttribute('data-date'),
             readingTime: parseInt(articleElement.getAttribute('data-reading-time')) || 5,
             excerpt: articleElement.getAttribute('data-excerpt'),
-            tags: articleElement.getAttribute('data-tags')?.split(',') || [],
+            tags: (articleElement.getAttribute('data-tags') || '').split(',').map(t => t.trim()).filter(t => t),
             featured: articleElement.getAttribute('data-featured') === 'true',
             content: doc.querySelector('.article-body').innerHTML,
             featuredImage: doc.querySelector('.article-image')?.src || doc.querySelector('.article-image')?.getAttribute('src') || '../assets/images/war.png',
@@ -158,6 +158,11 @@ function generateTableOfContents() {
     const headings = document.querySelectorAll('#article-content h2, #article-content h3');
     const tocContainer = document.getElementById('table-of-contents');
     
+    if (!tocContainer) {
+        console.warn('Table of contents container not found');
+        return;
+    }
+    
     if (headings.length > 0) {
         tocContainer.innerHTML = '';
         
@@ -238,7 +243,10 @@ function setupArticleFeatures() {
     
     // Set initial like count
     const likeCount = localStorage.getItem(`article_${articleId}_likes`) || '0';
-    document.getElementById('like-count').textContent = likeCount;
+    const likeCountEl = document.getElementById('like-count');
+    if (likeCountEl) {
+        likeCountEl.textContent = likeCount;
+    }
 }
 
 // Toggle like
@@ -327,25 +335,44 @@ function shareOnLinkedIn() {
 
 function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(() => {
-        showToast('لینک کپی شد!', 'success');
+        if (window.toast) {
+            window.toast.success('لینک مقاله با موفقیت کپی شد!');
+        } else {
+            showToast('لینک کپی شد!', 'success');
+        }
     }).catch(() => {
-        showToast('خطا در کپی لینک', 'error');
+        if (window.toast) {
+            window.toast.error('خطا در کپی کردن لینک');
+        } else {
+            showToast('خطا در کپی لینک', 'error');
+        }
     });
 }
 
 // Load related articles
 async function loadRelatedArticles() {
-    if (!currentArticle) return;
+    console.log('🔍 Loading related articles...');
+    console.log('Current article:', currentArticle);
+    
+    if (!currentArticle) {
+        console.error('❌ No current article found');
+        return;
+    }
     
     const relatedContainer = document.getElementById('related-articles');
-    if (!relatedContainer) return;
+    if (!relatedContainer) {
+        console.error('❌ Related articles container not found');
+        return;
+    }
     
     try {
         // Get all available articles
         const allArticles = await getAllArticles();
+        console.log('📚 All articles:', allArticles);
         
         // Find related articles based on shared tags
         const relatedArticles = findRelatedArticles(currentArticle, allArticles);
+        console.log('🔗 Related articles found:', relatedArticles);
         
         // Display up to 9 related articles
         displayRelatedArticles(relatedArticles.slice(0, 9));
@@ -361,7 +388,7 @@ async function getAllArticles() {
     
     // Article 1: AI
     try {
-        const response1 = await fetch('../data/articles/article-1.html');
+        const response1 = await fetch('/data/articles/article-1.html');
         if (response1.ok) {
             const html1 = await response1.text();
             const parser = new DOMParser();
@@ -380,7 +407,7 @@ async function getAllArticles() {
         articles.push({
             id: '1',
             title: 'کنترل به جای نوآوری؛ روایت توسعه نامتوازن هوش مصنوعی در ایران',
-            tags: ['هوش مصنوعی', 'سیاست', 'امنیت ملی', 'سند ملی'],
+            tags: ['هوش مصنوعی', 'سیاست', 'اینترنت'],
             category: 'تکنولوژی'
         });
     }
@@ -395,7 +422,7 @@ async function getAllArticles() {
     
     // Article 3: SMS
     try {
-        const response3 = await fetch('../data/articles/article-3.html');
+        const response3 = await fetch('/data/articles/article-3.html');
         if (response3.ok) {
             const html3 = await response3.text();
             const parser = new DOMParser();
@@ -414,7 +441,7 @@ async function getAllArticles() {
         articles.push({
             id: '3',
             title: 'از اینترنت تا پیامک؛ گسترش سانسور به آخرین کانال ارتباطی',
-            tags: ['سانسور', 'پیامک', 'فیلترینگ', 'پیک‌آسا'],
+            tags: ['سانسور', 'پیامک', 'فیلترینگ', 'اینترنت'],
             category: 'سانسور'
         });
     }
@@ -424,16 +451,20 @@ async function getAllArticles() {
 
 // Find related articles based on shared tags
 function findRelatedArticles(currentArticle, allArticles) {
+    const maxArticles = 9;
+    
     if (!currentArticle.tags || currentArticle.tags.length === 0) {
-        // If no tags, return other articles
-        return allArticles.filter(article => article.id !== currentArticle.id);
+        // If no tags, return shuffled articles
+        const otherArticles = allArticles.filter(article => article.id !== currentArticle.id);
+        return shuffleArray(otherArticles).slice(0, maxArticles);
     }
     
     const currentTags = currentArticle.tags.map(tag => tag.toLowerCase().trim());
     
     // Calculate relevance score for each article
-    const scoredArticles = allArticles
-        .filter(article => article.id !== currentArticle.id)
+    const allOtherArticles = allArticles.filter(article => article.id !== currentArticle.id);
+    
+    const scoredArticles = allOtherArticles
         .map(article => {
             const articleTags = (article.tags || []).map(tag => tag.toLowerCase().trim());
             
@@ -447,29 +478,53 @@ function findRelatedArticles(currentArticle, allArticles) {
                 sharedTags: sharedTags
             };
         })
-        .filter(article => article.score > 0) // Only articles with at least 1 shared tag
         .sort((a, b) => b.score - a.score); // Sort by relevance (most shared tags first)
     
-    // If we have related articles with shared tags, return them
-    if (scoredArticles.length > 0) {
-        return scoredArticles;
+    // Get articles with shared tags
+    const relatedWithTags = scoredArticles.filter(article => article.score > 0);
+    
+    // If we have enough related articles, return them
+    if (relatedWithTags.length >= maxArticles) {
+        return relatedWithTags.slice(0, maxArticles);
     }
     
-    // If no articles with shared tags, return all other articles
-    return allArticles.filter(article => article.id !== currentArticle.id);
+    // If we need more articles, add random ones from the rest
+    const articlesWithoutTags = scoredArticles.filter(article => article.score === 0);
+    const shuffledOthers = shuffleArray(articlesWithoutTags);
+    const needed = maxArticles - relatedWithTags.length;
+    
+    return [...relatedWithTags, ...shuffledOthers.slice(0, needed)];
+}
+
+// Shuffle array helper function
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
 
 // Display related articles
 function displayRelatedArticles(articles) {
+    console.log('📝 Displaying related articles:', articles);
     const container = document.getElementById('related-articles');
-    if (!container) return;
+    
+    if (!container) {
+        console.error('❌ Related articles container not found!');
+        return;
+    }
+    
+    console.log('✅ Container found:', container);
     
     if (articles.length === 0) {
+        console.warn('⚠️ No related articles to display');
         container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 1rem;">مقاله مرتبطی یافت نشد</p>';
         return;
     }
     
-    container.innerHTML = articles.map((article, index) => `
+    const html = articles.map((article, index) => `
         <a href="/pages/article.html?id=${article.id}" class="related-item">
             <div class="related-item-number">${index + 1}</div>
             <div class="related-item-content">
@@ -477,6 +532,10 @@ function displayRelatedArticles(articles) {
             </div>
         </a>
     `).join('');
+    
+    console.log('🎨 Generated HTML:', html.substring(0, 200) + '...');
+    container.innerHTML = html;
+    console.log('✅ Related articles displayed successfully');
 }
 
 // Load comments
@@ -584,7 +643,10 @@ async function incrementViews(articleId) {
         const viewsKey = `article_${articleId}_views`;
         const currentViews = parseInt(localStorage.getItem(viewsKey)) || 0;
         localStorage.setItem(viewsKey, (currentViews + 1).toString());
-        document.getElementById('article-views').textContent = currentViews + 1;
+        const viewsEl = document.getElementById('article-views');
+        if (viewsEl) {
+            viewsEl.textContent = currentViews + 1;
+        }
     } catch (error) {
         console.warn('Could not increment views:', error);
     }

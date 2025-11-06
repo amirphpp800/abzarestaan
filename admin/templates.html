@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمپلیت‌های آماده - پنل مدیریت</title>
+    <link rel="stylesheet" href="../assets/Font/fontiran.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .template-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover {
+            border-color: rgba(157, 9, 19, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .template-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(157, 9, 19, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .template-info h3 {
+            font-size: 1.1rem;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .template-info p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .template-preview {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            max-height: 150px;
+            overflow: hidden;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-use {
+            flex: 1;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #9D0913 0%, #c70812 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'IRANSans', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-use:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(157, 9, 19, 0.4);
+        }
+
+        .btn-preview {
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            font-family: 'IRANSans', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-preview:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <div class="admin-logo">
+                    <span class="logo-icon">📊</span>
+                    <span class="logo-text">پنل مدیریت</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">داشبورد</span>
+                </a>
+                <a href="articles.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">مقالات</span>
+                </a>
+                <a href="add-article.html" class="nav-item">
+                    <span class="nav-icon">➕</span>
+                    <span class="nav-text">افزودن مقاله</span>
+                </a>
+                <a href="templates.html" class="nav-item active">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">تمپلیت‌ها</span>
+                </a>
+                <a href="media.html" class="nav-item">
+                    <span class="nav-icon">🖼️</span>
+                    <span class="nav-text">رسانه‌ها</span>
+                </a>
+                <a href="../index.html" class="nav-item" target="_blank">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-text">مشاهده سایت</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <span>🚪</span>
+                    خروج
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>تمپلیت‌های آماده</h1>
+                <a href="add-article.html" class="btn-primary">بازگشت به ویرایشگر</a>
+            </header>
+
+            <div class="dashboard-content">
+                <div class="templates-grid" id="templatesGrid">
+                    <!-- Templates will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-auth.js"></script>
+    <script src="templates.js"></script>
+</body>
+</html>

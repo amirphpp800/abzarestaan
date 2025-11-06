@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پادکست لایه هفتم - ابزارستان</title>
+    <meta name="description" content="پادکست لایه هفتم - گفتگوهای تخصصی درباره امنیت سایبری و فناوری">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/pwa/manifest.json">
+    <meta name="theme-color" content="#9D0913">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/Font/fontiran.css">
+    <link rel="stylesheet" href="../css/loading.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .podcast-hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .podcast-info-card {
+            background: rgba(3, 3, 3, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            padding: 3rem 2.5rem 3.5rem 2.5rem;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 100px;
+            align-self: start;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+        }
+
+        .podcast-episodes-card {
+            padding-bottom: 2rem;
+        }
+
+        .podcast-hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            align-items: center;
+            text-align: center;
+        }
+
+        .podcast-logo {
+            display: none;
+        }
+
+        .podcast-info h1 {
+            font-size: 2.1rem;
+            color: white;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .podcast-info p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2.2;
+            margin-bottom: 0;
+            text-align: center;
+            letter-spacing: 0.015em;
+            font-weight: 400;
+            max-width: 100%;
+        }
+
+        .podcast-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .podcast-icon svg {
+            width: 70px;
+            height: 70px;
+            color: rgba(255, 255, 255, 0.95);
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+        }
+
+        .podcast-info {
+            width: 100%;
+        }
+
+        .podcast-stats {
+            display: none;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stat-item svg {
+            color: #ff8c00;
+        }
+
+        .episodes-section {
+            margin-top: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            color: white;
+        }
+
+        .episodes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .episode-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 1rem;
+        }
+
+        .episode-card:hover {
+            border-color: rgba(255, 140, 0, 0.3);
+            transform: translateX(-4px);
+            box-shadow: 0 4px 16px rgba(255, 140, 0, 0.15);
+        }
+
+        .episode-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .episode-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .episode-card:hover .episode-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .episode-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-overlay svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .episode-content {
+            flex: 1;
+        }
+
+        .episode-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+
+        .episode-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.25rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            /* -webkit-line-clamp: 2; */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .episode-date {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .episode-date::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 140, 0, 0.6);
+            border-radius: 50%;
+        }
+
+        .episode-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            /* -webkit-line-clamp: 2; */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .episode-meta {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 1024px) {
+            .podcast-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .podcast-episodes-card {
+                order: 2;
+                max-height: none;
+            }
+
+            .podcast-info-card {
+                order: 1;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .podcast-hero {
+                gap: 1.5rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .podcast-info-card {
+                padding: 1.5rem 1rem;
+                margin-bottom: 1.5rem;
+                position: relative;
+                top: auto;
+                z-index: 1;
+                order: -1;
+                align-self: auto;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .podcast-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .podcast-icon svg {
+                width: 50px;
+                height: 50px;
+            }
+
+            .podcast-hero-content {
+                text-align: center;
+                gap: 0;
+            }
+
+            .podcast-logo {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+
+            .podcast-info h1 {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+                margin-top: 1rem;
+            }
+
+            .podcast-info p {
+                font-size: 0.85rem;
+                line-height: 1.8;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .podcast-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .podcast-episodes-card {
+                order: 1;
+            }
+
+            .episode-card {
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .episode-thumbnail {
+                width: 70px;
+                height: 70px;
+            }
+
+            .episode-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-right">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    <nav class="main-nav" id="mainNav">
+                        <a href="../index.html" class="nav-item">خانه</a>
+                        <a href="tools.html" class="nav-item">ابزارها</a>
+                        <a href="articles.html" class="nav-item">یادداشت‌ها</a>
+                        <a href="podcasts.html" class="nav-item">پادکست‌ها</a>
+                        <a href="about.html" class="nav-item">درباره</a>
+                    </nav>
+                </div>
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.75rem;">
+                            <span class="logo-text">ابزارستان</span>
+                            <img src="../assets/logo/logo.svg" alt="ابزارستان" class="logo-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Podcast Hero -->
+            <div class="podcast-hero">
+                <!-- Episodes Card (Left) -->
+                <div class="podcast-episodes-card">
+                    <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.25rem;">اپیزودها</h3>
+                    <div id="episodesList">
+                        <!-- Episodes will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Info Card (Right) -->
+                <div class="podcast-info-card">
+                    <div class="podcast-hero-content">
+                        <div class="podcast-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                            </svg>
+                        </div>
+                        <div class="podcast-info">
+                            <h1>پادکست لایه هفتم</h1>
+                            <p>پادکست «لایه هفتم» کار مشترکی از گروه فیلتربان و رادیو فردا است. در این پادکست در مورد فیلترینگ در ایران، راه‌های دسترسی به اینترنت، نگرانی‌‌های امنیت دیجیتال شهروندان، حمله‌های سایبری و امثال اینها صحبت خواهیم کرد. لایه هفتم در علوم کامپیوتر به لایه‌ای گفته می‌شود که به امنیت سایبری مربوط است و این لایه شبکه، بین کاربر و سیستم عامل ارتباط برقرار می‌کند. پادکست «لایه هفتم» علاوه بر وبسایت فیلتربان و رادیو فردا از همه پادگیرها منتشر می‌شود.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ابـزارستـان</h4>
+                    <p>پلتفرمی برای به اشتراک‌گذاری دانش و ابزارهای کاربردی</p>
+                    <div class="social-media">
+                        <h5>سوشـال مدیـا</h5>
+                        <div class="social-links">
+                            <a href="https://t.me/iEnuma" class="social-link" aria-label="Telegram" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="X (Twitter)" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="YouTube" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>دسترسی سریع</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">خانه</a></li>
+                        <li><a href="tools.html">ابزارها</a></li>
+                        <li><a href="articles.html">یادداشت‌ها</a></li>
+                        <li><a href="podcasts.html">پادکست‌ها</a></li>
+                        <li><a href="about.html">درباره ما</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>ارتباط با ما</h4>
+                    <div class="contact-info">
+                        <a href="mailto:abzarestan@proton.me" class="contact-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>abzarestan@proton.me</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ۱۴۰۴ ابـزارستـان. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/loading.js"></script>
+    <script src="../js/auto-optimize.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/mobile-menu.js"></script>
+    <script src="../pwa/pwa-init.js"></script>
+    <script>
+        // Episodes data
+        const episodes = [
+            {
+                id: 1,
+                title: 'توسعه هوش مصنوعی در ایران؛ نوآوری در خدمت نظارت',
+                date: '۱۴ آذر ۱۴۰۳',
+                duration: '20:29',
+                description: 'بررسی توسعه هوش مصنوعی در ایران و چالش‌های مربوط به حریم خصوصی و نظارت دولتی',
+                thumbnail: '../assets/images/laye7/E1.jpg'
+            },
+            {
+                id: 2,
+                title: 'خاموشی پنهان؛ کلیدشکافی استخراجی جدید سرویس دیجیتال در ایران',
+                date: '۱۴ آذر ۱۴۰۳',
+                duration: '22:15',
+                description: 'تحلیل روش‌های جدید کلیدشکافی و نظارت بر ارتباطات دیجیتال در ایران',
+                thumbnail: '../assets/images/laye7/E2.png'
+            },
+            {
+                id: 3,
+                title: 'VPN در مان بحران؛ از انتخاب ایمن تا اتصال پایدار',
+                date: '۱۴ آذر ۱۴۰۳',
+                duration: '25:40',
+                description: 'راهنمای جامع انتخاب و استفاده از VPN در شرایط بحرانی و محدودیت‌های اینترنت',
+                thumbnail: '../assets/images/laye7/E3.png'
+            },
+            {
+                id: 4,
+                title: 'متصل بمانیم؛ راهنمای ارتباط در زمان بحران',
+                date: '۲۷ شهریور ۱۴۰۲',
+                duration: '18:45',
+                description: 'بررسی روش‌های ارتباطی جایگزین و راهکارهای عملی برای حفظ ارتباط در شرایط بحرانی',
+                thumbnail: '../assets/images/laye7/E4.png'
+            },
+            {
+                id: 5,
+                title: 'پروتکل روز صفر؛ آمادگی پیش از قطع اینترنت',
+                date: '۲۷ شهریور ۱۴۰۲',
+                duration: '23:30',
+                description: 'آمادگی برای مواجهه با قطعی اینترنت و راهکارهای پیشگیرانه',
+                thumbnail: '../assets/images/laye7/E5.png'
+            },
+            {
+                id: 6,
+                title: 'هزار دستان سانسور؛ از فیلتر اینترنت تا پیامک',
+                date: '۱۴ مرداد ۱۴۰۲',
+                duration: '26:10',
+                description: 'بررسی جامع روش‌های مختلف سانسور و فیلترینگ در ایران',
+                thumbnail: '../assets/images/laye7/E6.png'
+            },
+            {
+                id: 7,
+                title: 'جاسوس افزار مرحله جدید سرکوب دیجیتال در ایران',
+                date: '۱۴ مرداد ۱۴۰۲',
+                duration: '24:55',
+                description: 'تحلیل جاسوس‌افزارها و ابزارهای نظارتی مورد استفاده در ایران',
+                thumbnail: '../assets/images/laye7/E7.png'
+            }
+        ];
+
+        // Load episodes
+        function loadEpisodes() {
+            const container = document.getElementById('episodesList');
+            // Reverse episodes array to show newest first
+            const reversedEpisodes = [...episodes].reverse();
+            container.innerHTML = reversedEpisodes.map(episode => `
+                <a href="podcast-episode.html?id=${episode.id}" class="episode-card">
+                    <div class="episode-thumbnail">
+                        <img src="${episode.thumbnail}" alt="${episode.title}" onerror="this.src='../assets/images/audio.png'">
+                        <div class="play-overlay">
+                            <svg viewBox="0 0 24 24" fill="white">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="episode-content">
+                        <div class="episode-header">
+                            <div>
+                                <h3 class="episode-title">${episode.title}</h3>
+                                <div class="episode-date">${episode.date}</div>
+                            </div>
+                        </div>
+                        <p class="episode-description">${episode.description}</p>
+                        <div class="episode-meta">
+                            <div class="meta-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>${episode.duration}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadEpisodes);
+    </script>
+</body>
+</html>

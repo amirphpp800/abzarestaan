@@ -60,7 +60,127 @@
             </div>
 
             <div class="tools-grid">
-                <p style="text-align: center; color: var(--text-secondary); padding: 3rem; grid-column: 1 / -1;">به زودی...</p>
+                <!-- Windows System Utility Tool -->
+                <div class="tool-card">
+                    <div class="tools-logo">
+                        <img src="tools-logo.png" alt="Windows System Utility Tool">
+                    </div>
+                    <h3 class="tool-title">Windows System Utility Tool</h3>
+                    <span class="tool-version">v1.0.0</span>
+                    <p class="tool-description">ابزار قدرتمند برای نگهداری و بهینه‌سازی سیستم ویندوز</p>
+                    
+                    <div class="tool-platform">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                        </svg>
+                        <span>ویندوز</span>
+                    </div>
+                    
+                    <div class="tool-actions">
+                        <button class="tool-details-btn" onclick="openToolModal('tool1')">جزئیات</button>
+                        <a href="https://drive.google.com/uc?export=download&id=13qBkzApvgalIgM3uCKqO1WZ9W2offgwd" class="tool-download-btn" download>دانلود</a>
+                    </div>
+                </div>
+
+                <!-- VPN Tool -->
+                <div class="tool-card">
+                    <div class="tools-logo">
+                        <img src="tools-logo.png" alt="تحریم شکن">
+                    </div>
+                    <h3 class="tool-title">تحریم شکن</h3>
+                    <span class="tool-version">v1.0.0</span>
+                    <p class="tool-description">اتصال سریع و آسان بدون نیاز به تنظیمات پیچیده</p>
+                    
+                    <div class="tool-platform">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                        </svg>
+                        <span>ویندوز</span>
+                    </div>
+                    
+                    <div class="tool-actions">
+                        <button class="tool-details-btn" onclick="openToolModal('tool2')">جزئیات</button>
+                        <a href="https://drive.google.com/uc?export=download&id=13qBkzApvgalIgM3uCKqO1WZ9W2offgwd" class="tool-download-btn" download>دانلود</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Tool Details -->
+            <div id="toolModal" class="tool-modal">
+                <div class="modal-overlay" onclick="closeToolModal()"></div>
+                <div class="modal-content">
+                    <button class="modal-close" onclick="closeToolModal()">×</button>
+                    <div id="modalBody"></div>
+                </div>
+            </div>
+
+            <!-- Hidden Tool Details -->
+            <div id="tool1-details" style="display: none;">
+                <div class="modal-header">
+                    <div class="modal-icon">💻</div>
+                    <h2>Windows System Utility Tool v1.0.0</h2>
+                    <p>ابزار قدرتمند و کاربردی برای نگهداری و بهینه‌سازی سیستم ویندوز با رابط ساده 🌟</p>
+                </div>
+                
+                <div class="modal-features">
+                    <h3>🔥 قابلیت‌های اصلی ‼️</h3>
+                    
+                    <div class="feature-item">
+                        <strong>🧹 پاکسازی کش سیستم 👇</strong>
+                        <ul>
+                            <li>حذف فایل‌های موقت از تمام مکان‌های مهم</li>
+                            <li>پاکسازی کامل کش برنامه‌ها</li>
+                            <li>نمایش حجم آزاد شده و تعداد فایل‌های حذف شده</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>🌐 تست اتصال شبکه 👇</strong>
+                        <ul>
+                            <li>بررسی اتصال به سرورهای DNS معتبر</li>
+                            <li>تست سرعت حل نام دامنه‌ها</li>
+                            <li>تشخیص مشکلات اتصال اینترنت</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>🗑 پاکسازی کش DNS</strong>
+                        <ul>
+                            <li>حذف کامل کش DNS برای حل مشکلات شبکه</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <strong>💻 نمایش اطلاعات سیستم 👇</strong>
+                        <ul>
+                            <li>مشخصات کامل سخت‌افزار و نرم‌افزار</li>
+                            <li>وضعیت CPU، RAM، هارد و شبکه</li>
+                            <li>قابلیت ذخیره اطلاعات در فایل متنی📝</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tool2-details" style="display: none;">
+                <div class="modal-header">
+                    <div class="modal-icon">🧋</div>
+                    <h2>تحریم شکن ✅</h2>
+                    <p>بدون نیاز به برنامه جانبی و طی کردن مسیر طولانی کنترل پنل ⚙️</p>
+                </div>
+                
+                <div class="modal-features">
+                    <h3>📋 توضیحات</h3>
+                    <p>⚙️ یه ابزار درست کردم راحت نصب میشه و میتونید متصل بشید نسخه اوله امیدوارم آپدیت بدم و نسخه های بعدیشو بهتر کنم ☕️</p>
+                    
+                    <div class="feature-item">
+                        <strong>✨ ویژگی‌ها:</strong>
+                        <ul>
+                            <li>نصب و راه‌اندازی آسان</li>
+                            <li>بدون نیاز به تنظیمات پیچیده</li>
+                            <li>اتصال سریع و پایدار</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -94,6 +214,32 @@
                 }
             });
         }
+
+        // Tool Modal Functions
+        function openToolModal(toolId) {
+            const modal = document.getElementById('toolModal');
+            const modalBody = document.getElementById('modalBody');
+            const toolDetails = document.getElementById(toolId + '-details');
+            
+            if (toolDetails) {
+                modalBody.innerHTML = toolDetails.innerHTML;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeToolModal() {
+            const modal = document.getElementById('toolModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeToolModal();
+            }
+        });
     </script>
 </body>
 </html>

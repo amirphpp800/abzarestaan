@@ -16,6 +16,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/Font/fontiran.css">
+    <link rel="stylesheet" href="css/loading.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
@@ -59,26 +60,24 @@
             <div class="content-grid">
                 <!-- Top Cards -->
                 <section class="top-cards">
-                    <div class="feature-card podcast-card">
-                        <div class="card-icon">
-                            🎤
+                    <a href="pages/podcast-layeh7.html" class="feature-card podcast-card" style="text-decoration: none;">
+                        <div class="podcast-icon-wrapper">
+                            <img src="assets/images/audio.png" alt="Podcast Icon" class="podcast-icon">
                         </div>
                         <div class="card-content">
-                            <h3>پادکست لایو هفتم</h3>
-                            <p>درباره‌ای قراردادی در ایران، نگاهی دقیق‌تر به اینترنت نگار طبرانیت دیجیتال هوشمندان، حمله‌های سایبری</p>
+                            <h3>پادکست لایه هفتم</h3>
+                            <p>در مورد فیلترینگ در ایران، راه‌های دسترسی به اینترنت، نگرانی‌های امنیت دیجیتال شهروندان، حمله‌های سایبری</p>
                         </div>
-                        <button class="card-btn">←</button>
-                    </div>
+                    </a>
 
                     <div class="feature-card privacy-card">
-                        <div class="card-icon">
-                            🛡️
+                        <div class="privacy-banner">
+                            <img src="assets/images/globe.svg" alt="Globe" class="privacy-banner-img">
                         </div>
                         <div class="card-content">
                             <h3>ایران در خاموشی</h3>
-                            <p>خبرگان را پیگیر آن که در شهر برای قطعی با اختلال اینترنت آماده کنید</p>
+                            <p>خودتان را پیش از آن‌که دیر شود برای قطعی یا اختلال اینترنت آماده کنید</p>
                         </div>
-                        <button class="card-btn">←</button>
                     </div>
                 </section>
 
@@ -206,6 +205,26 @@
                 <div class="footer-section">
                     <h4>ابـزارستـان</h4>
                     <p>پلتفرمی برای به اشتراک‌گذاری دانش و ابزارهای کاربردی</p>
+                    <div class="social-media">
+                        <h5>سوشـال مدیـا</h5>
+                        <div class="social-links">
+                            <a href="https://t.me/iEnuma" class="social-link" aria-label="Telegram" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="X (Twitter)" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social-link" aria-label="YouTube" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>دسترسی سریع</h4>
@@ -218,10 +237,16 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>تماس با ما</h4>
-                    <ul class="footer-links">
-                        <li>به زودی...</li>
-                    </ul>
+                    <h4>ارتباط با ما</h4>
+                    <div class="contact-info">
+                        <a href="mailto:abzarestan@proton.me" class="contact-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>abzarestan@proton.me</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -233,12 +258,13 @@
                     </svg>
                     نصب اپلیکیشن
                 </button>
-                <p>&copy; ۱۴۰۳ ابـزارستـان. تمامی حقوق محفوظ است.</p>
+                <p>&copy; ۱۴۰۴ ابـزارستـان. تمامی حقوق محفوظ است.</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="js/loading.js"></script>
     <script src="js/auto-optimize.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
