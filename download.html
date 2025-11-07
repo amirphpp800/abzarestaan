@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دانلود فایل - ابزارستان</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo/logo.svg">
+    <link rel="stylesheet" href="assets/Font/fontiran.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'AbarLowFaNum', 'AbarMidFaNum', Arial, sans-serif;
+            background: #0C0020;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .download-container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .file-info {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .file-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .file-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+
+        .file-size {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #9D0913 0%, #c70812 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'AbarLowFaNum', 'AbarMidFaNum', Arial, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(157, 9, 19, 0.4);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #9D0913;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <img src="assets/logo/logo.svg" alt="ابزارستان" class="logo">
+        <h1>دانلود فایل</h1>
+        
+        <div id="loadingState">
+            <div class="loading"></div>
+            <p style="color: rgba(255,255,255,0.7); margin-top: 1rem;">در حال بارگذاری...</p>
+        </div>
+
+        <div id="fileContent" style="display: none;">
+            <div class="file-info">
+                <div class="file-icon" id="fileIcon">📄</div>
+                <div class="file-name" id="fileName">نام فایل</div>
+                <div class="file-size" id="fileSize">حجم فایل</div>
+            </div>
+
+            <button class="download-btn" id="downloadBtn" onclick="downloadFile()">
+                <span>⬇️</span>
+                دانلود فایل
+            </button>
+        </div>
+
+        <div id="errorState" style="display: none;">
+            <p class="error-message">فایل مورد نظر یافت نشد یا منقضی شده است.</p>
+        </div>
+
+        <a href="index.html" class="back-link">← بازگشت به صفحه اصلی</a>
+    </div>
+
+    <script>
+        let currentFile = null;
+
+        async function loadFile() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileId = urlParams.get('file');
+            const fileInfo = urlParams.get('info');
+
+            if (!fileId) {
+                showError();
+                return;
+            }
+
+            try {
+                // Try to get file info from URL first
+                if (fileInfo) {
+                    const info = JSON.parse(decodeURIComponent(fileInfo));
+                    
+                    // Try to load from localStorage
+                    const files = JSON.parse(localStorage.getItem('uploadedFiles') || '[]');
+                    currentFile = files.find(f => f.id === fileId);
+                    
+                    // If not found in localStorage, use info from URL
+                    if (!currentFile) {
+                        currentFile = info;
+                        currentFile.fromURL = true;
+                    }
+                } else {
+                    // Fallback to localStorage only
+                    const files = JSON.parse(localStorage.getItem('uploadedFiles') || '[]');
+                    currentFile = files.find(f => f.id === fileId);
+                }
+
+                if (!currentFile) {
+                    showError();
+                    return;
+                }
+
+                // Display file info
+                document.getElementById('fileName').textContent = currentFile.name;
+                document.getElementById('fileSize').textContent = formatFileSize(currentFile.size);
+                document.getElementById('fileIcon').textContent = getFileIcon(currentFile.mimeType);
+
+                // Show file content
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('fileContent').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading file:', error);
+                showError();
+            }
+        }
+
+        function showError() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+        function downloadFile() {
+            if (!currentFile) return;
+
+            // If file has data (from localStorage), download it
+            if (currentFile.data) {
+                // Convert data URL to blob
+                const blob = dataURLtoBlob(currentFile.data);
+                const url = URL.createObjectURL(blob);
+
+                // Create temporary link and trigger download
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = currentFile.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                // Clean up
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+            } else {
+                // File info only, show error
+                alert('فایل در حافظه محلی یافت نشد. لطفا از پنل مدیریت دانلود کنید.');
+                return;
+            }
+
+            // Update button text
+            const btn = document.getElementById('downloadBtn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span>✓</span> دانلود شد!';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }, 3000);
+        }
+
+        function dataURLtoBlob(dataURL) {
+            const arr = dataURL.split(',');
+            const mime = arr[0].match(/:(.*?);/)[1];
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function getFileIcon(mimeType) {
+            if (mimeType.startsWith('image/')) return '🖼️';
+            if (mimeType.startsWith('audio/')) return '🎵';
+            if (mimeType.startsWith('video/')) return '🎬';
+            if (mimeType.includes('pdf')) return '📕';
+            if (mimeType.includes('zip') || mimeType.includes('rar')) return '📦';
+            if (mimeType.includes('word') || mimeType.includes('document')) return '📝';
+            return '📄';
+        }
+
+        // Load file on page load
+        document.addEventListener('DOMContentLoaded', loadFile);
+    </script>
+</body>
+</html>

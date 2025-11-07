@@ -229,12 +229,18 @@ function showDirectLink(fileId) {
     const file = uploadedFiles.find(f => f.id === fileId);
     if (!file) return;
 
-    // Create a blob URL for direct download
-    const blob = dataURLtoBlob(file.data);
-    const url = URL.createObjectURL(blob);
-
-    // Create a shareable download link
-    const downloadLink = `${window.location.origin}/download.html?file=${fileId}`;
+    // Encode file info for URL (without the large data)
+    const fileInfo = {
+        id: file.id,
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        mimeType: file.mimeType
+    };
+    
+    // Create a shareable download link with encoded file info
+    const encodedInfo = encodeURIComponent(JSON.stringify(fileInfo));
+    const downloadLink = `${window.location.origin}/download.html?file=${fileId}&info=${encodedInfo}`;
     
     document.getElementById('linkInput').value = downloadLink;
     document.getElementById('linkModal').classList.add('active');
