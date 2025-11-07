@@ -500,18 +500,7 @@ function toggleMobileMenu() {
     nav.classList.toggle('active');
 }
 
-// Service Worker registration for PWA (optional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
-            .then(function(registration) {
-                console.log('ServiceWorker registered successfully');
-            })
-            .catch(function(registrationError) {
-                console.log('ServiceWorker registration failed');
-            });
-    });
-}
+// Service Worker registration is handled in pwa/pwa-init.js
 
 // ArticleCard, ToolCard, and LoadingSkeleton classes are defined in components.js
 
@@ -523,24 +512,4 @@ class Toast {
     }
 }
 
-// Placeholder for Search functionality
-const searchInstance = {
-    data: { articles: [], tools: [] },
-    setData: function(articles, tools) {
-        this.data.articles = articles;
-        this.data.tools = tools;
-    },
-    search: function(query) {
-        const lowerCaseQuery = query.toLowerCase();
-        const foundArticles = this.data.articles.filter(article =>
-            article.title.toLowerCase().includes(lowerCaseQuery) ||
-            article.excerpt.toLowerCase().includes(lowerCaseQuery) ||
-            article.category.toLowerCase().includes(lowerCaseQuery)
-        );
-        const foundTools = this.data.tools.filter(tool =>
-            tool.title.toLowerCase().includes(lowerCaseQuery) ||
-            tool.description.toLowerCase().includes(lowerCaseQuery)
-        );
-        return { articles: foundArticles, tools: foundTools };
-    }
-};
+// Search functionality is defined in components.js (Search class and searchInstance)

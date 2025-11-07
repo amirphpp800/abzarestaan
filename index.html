@@ -96,11 +96,21 @@
 
                     <a href="pages/iran-off.html" class="feature-card privacy-card" style="text-decoration: none;">
                         <div class="privacy-banner">
-                            <img src="assets/images/globe.svg" alt="Globe" class="privacy-banner-img" loading="lazy">
+                            <img src="/assets/images/globe.svg" alt="Globe" class="privacy-banner-img" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <div class="card-content">
                             <h3>ایران در خاموشی</h3>
                             <p>خودتان را پیش از آن‌که دیر شود برای قطعی یا اختلال اینترنت آماده کنید</p>
+                        </div>
+                    </a>
+
+                    <a href="pages/bpb-guide.html" class="feature-card cloudflare-card" style="text-decoration: none;">
+                        <div class="cloudflare-bg-icon">
+                            <img src="assets/images/BPB-card.svg" alt="BPB Icon" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>دسترسی به اینترنت آزاد با کلودفلر</h3>
+                            <p>دسترسی به اینترنت بدون فیلتر با استفاده از پنل BPB و Cloudflare Workers</p>
                         </div>
                     </a>
                 </section>
@@ -151,10 +161,6 @@
                             <img src="assets/images/war.png" alt="میراث جنگ" class="article-hero-image" loading="eager">
                         </div>
                         <div class="article-content">
-                            <div class="article-meta">
-                                <span class="read-time">📖 ۳ دقیقه</span>
-                                <button class="bookmark-btn">🔖 تحلیل</button>
-                            </div>
                             <h1 class="main-title">میراث جنگ ۱۲ روزه: غلبه نگاه امنیتی بر اکوسیستم دیجیتال و شبکه اینترنت</h1>
                             <p class="article-summary">بررسی تأثیرات جنگ ۱۲ روزه بر اکوسیستم دیجیتال ایران و چگونگی تبدیل نگاه امنیتی به رویکرد غالب در مدیریت فضای مجازی و شبکه اینترنت کشور.</p>
                             <a href="/pages/article.html?id=2" target="_blank" class="read-more-btn">مطالعه</a>
@@ -162,6 +168,38 @@
                     </div>
                 </section>
             </div>
+
+            <!-- Network and Policy Section -->
+            <section class="cyber-threats-section network-policy-section">
+                <div class="cyber-header">
+                    <h3>شبکه و سیاستگذاری</h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                </div>
+                <a href="pages/article.html?id=5" class="cyber-main-card">
+                    <img src="assets/images/network.png" alt="شبکه و سیاستگذاری" class="cyber-image" loading="lazy">
+                    <div class="cyber-content">
+                        <div class="cyber-badge network-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            </svg>
+                            گزارش شبکه و سیاستگذاری
+                        </div>
+                        <h4>از اینترنت طبقاتی تا اعلام شروط رفع فیلتر تلگرام؛ اجرای گام به گام مصوبه‌ای که انتشار عمومی نیافت</h4>
+                        <div class="cyber-meta">
+                            <span>📅 ۱۶ آبان ۱۴۰۴</span>
+                            <span>مطالعه بیشتر ←</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="cyber-list" id="latest-articles-list">
+                    <!-- این بخش به صورت خودکار با جدیدترین مقالات پر می‌شود -->
+                </div>
+                <a href="pages/articles.html" class="cyber-more">مطالعه بیشتر ←</a>
+            </section>
 
             <!-- Cyber Threats Section -->
             <section class="cyber-threats-section">
@@ -180,7 +218,7 @@
                             </svg>
                             گزارش تهدیدات سایبری
                         </div>
-                        <h4>از جنگ تا شناسایی اولین قربانیان ایرانی جاسوس‌افزار خانوادگی کاسوس در ایران</h4>
+                        <h4>بررسی تهدیدات سایبری و شناسایی نرم‌افزارهای مخرب در ایران</h4>
                         <div class="cyber-meta">
                             <span>📅 ۳۱ می ۲۰۲۴</span>
                             <span>مطالعه بیشتر ←</span>
@@ -191,14 +229,14 @@
                     <div class="cyber-item">
                         <span class="cyber-number">۱</span>
                         <div class="cyber-item-content">
-                            <h5>گزارش تهدیدهای سایبری ایران؛ جنگ، خاموش، علیه اقلیت‌های قومی و فعالان جامعه مدنی</h5>
+                            <h5>گزارش تهدیدات سایبری در ایران و تأثیر آن بر امنیت دیجیتال کاربران</h5>
                             <span class="cyber-date">۱۷ می ۲۰۲۴</span>
                         </div>
                     </div>
                     <div class="cyber-item">
                         <span class="cyber-number">۲</span>
                         <div class="cyber-item-content">
-                            <h5>شبکه‌ای از کانال‌های تلگرامی توجیهگر خشونت جنسی و تجاوز جنسی؛ ابزاری برای سرکوب مخالفان سیاسی و مدنی</h5>
+                            <h5>بررسی محتوای نامناسب در کانال‌های تلگرامی و تأثیر آن بر امنیت کاربران</h5>
                             <span class="cyber-date">۱۵ دسامبر ۲۰۲۳</span>
                         </div>
                     </div>
@@ -212,12 +250,12 @@
                     <div class="cyber-item">
                         <span class="cyber-number">۴</span>
                         <div class="cyber-item-content">
-                            <h5>گزارش سالانه رایس سایبری ایران و فربایش حقوق شهروندان در دوران پس از جنبش زن، زندگی، آزادی</h5>
+                            <h5>گزارش سالانه امنیت سایبری ایران و چالش‌های حقوق دیجیتال شهروندان</h5>
                             <span class="cyber-date">۱ می ۲۰۲۴</span>
                         </div>
                     </div>
                 </div>
-                <a href="#" class="cyber-more">مطالعه بیشتر ←</a>
+                <a href="pages/articles.html" class="cyber-more">مطالعه بیشتر ←</a>
             </section>
         </div>
     </main>
@@ -321,6 +359,112 @@
                 }
             });
         }
+    </script>
+
+    <!-- Auto Load Latest Articles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // لیست مقالات با اطلاعات کامل (شامل تصویر و خلاصه)
+            const allArticles = [
+                { 
+                    id: 5, 
+                    title: 'از اینترنت طبقاتی تا اعلام شروط رفع فیلتر تلگرام؛ اجرای گام به گام مصوبه‌ای که انتشار عمومی نیافت', 
+                    excerpt: 'بررسی اجرای گام به گام مصوبه‌ای که انتشار عمومی نیافت و تأثیر آن بر اینترنت ایران و رفع فیلتر تلگرام.',
+                    date: '۱۶ آبان ۱۴۰۴',
+                    image: 'assets/images/network.png'
+                },
+                { 
+                    id: 4, 
+                    title: 'گزارش اینترنت ایران - سپتامبر ۲۰۲۴', 
+                    excerpt: 'گزارش جامع از وضعیت اینترنت در ایران در ماه سپتامبر ۲۰۲۴ و بررسی تغییرات و چالش‌های پیش رو.',
+                    date: '۱۵ مهر ۱۴۰۴',
+                    image: 'assets/images/network.png'
+                },
+                { 
+                    id: 3, 
+                    title: 'از اینترنت تا پیامک؛ گسترش سانسور به آخرین کانال ارتباطی', 
+                    excerpt: 'بررسی گسترش سانسور از اینترنت به پیامک و تأثیر آن بر آخرین کانال‌های ارتباطی شهروندان.',
+                    date: '۲۳ مرداد ۱۴۰۴',
+                    image: 'assets/images/sms.png'
+                },
+                { 
+                    id: 2, 
+                    title: 'میراث جنگ ۱۲ روزه: غلبه نگاه امنیتی بر اکوسیستم دیجیتال و شبکه اینترنت', 
+                    excerpt: 'بررسی تأثیرات جنگ ۱۲ روزه بر اکوسیستم دیجیتال ایران و چگونگی تبدیل نگاه امنیتی به رویکرد غالب در مدیریت فضای مجازی و شبکه اینترنت کشور.',
+                    date: '۱۰ مرداد ۱۴۰۴',
+                    image: 'assets/images/war.png'
+                },
+                { 
+                    id: 1, 
+                    title: 'کنترل به جای نوآوری؛ روایت توسعه نامتوازن هوش مصنوعی در ایران', 
+                    excerpt: 'بررسی چالش‌های توسعه هوش مصنوعی در ایران و تمرکز بر کنترل به جای نوآوری.',
+                    date: '۱۸ آبان ۱۴۰۳',
+                    image: 'assets/images/ai.png'
+                }
+            ];
+            
+            // مرتب‌سازی بر اساس ID (جدیدترین‌ها اول)
+            allArticles.sort((a, b) => b.id - a.id);
+            
+            // لود خودکار آخرین مقاله در بخش Hero
+            const latestArticle = allArticles[0];
+            const heroSection = document.querySelector('.main-article-section .article-hero');
+            
+            if (heroSection && latestArticle) {
+                // به‌روزرسانی تصویر
+                const heroImage = heroSection.querySelector('.article-hero-image');
+                if (heroImage) {
+                    heroImage.src = latestArticle.image;
+                    heroImage.alt = latestArticle.title;
+                }
+                
+                // به‌روزرسانی عنوان
+                const heroTitle = heroSection.querySelector('.main-title');
+                if (heroTitle) {
+                    heroTitle.textContent = latestArticle.title;
+                }
+                
+                // به‌روزرسانی خلاصه
+                const heroSummary = heroSection.querySelector('.article-summary');
+                if (heroSummary) {
+                    heroSummary.textContent = latestArticle.excerpt;
+                }
+                
+                // به‌روزرسانی لینک
+                const heroLink = heroSection.querySelector('.read-more-btn');
+                if (heroLink) {
+                    heroLink.href = `/pages/article.html?id=${latestArticle.id}`;
+                }
+                
+                console.log('Latest article loaded in hero section:', latestArticle.title);
+            }
+            
+            // لود خودکار جدیدترین مقالات در بخش یادداشت‌های پیشنهادی
+            const listContainer = document.getElementById('latest-articles-list');
+            
+            if (listContainer) {
+                console.log('Container found, loading articles...');
+                
+                // نمایش 3 مقاله جدید (بعد از آخرین مقاله که در hero نمایش داده شد)
+                const latestArticles = allArticles.slice(0, 3);
+                
+                // ساخت HTML برای هر مقاله
+                const articlesHTML = latestArticles.map((article, index) => `
+                    <a href="pages/article.html?id=${article.id}" class="cyber-item">
+                        <span class="cyber-number">${['۱', '۲', '۳'][index]}</span>
+                        <div class="cyber-item-content">
+                            <h5>${article.title}</h5>
+                            <span class="cyber-date">${article.date}</span>
+                        </div>
+                    </a>
+                `).join('');
+                
+                listContainer.innerHTML = articlesHTML;
+                console.log('Articles loaded successfully!');
+            } else {
+                console.error('Container not found!');
+            }
+        });
     </script>
 </body>
 </html>

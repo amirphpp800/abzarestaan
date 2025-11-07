@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>راهنمای BPB Panel - ابزارستان</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/logo/logo.svg">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../assets/Font/fontiran.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/bpb-guide.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-right">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="منو">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    <nav class="main-nav" id="mainNav">
+                        <a href="../index.html" class="nav-item">خانه</a>
+                        <a href="tools.html" class="nav-item">ابزارها</a>
+                        <a href="articles.html" class="nav-item">یادداشت‌ها</a>
+                        <a href="podcasts.html" class="nav-item">پادکست‌ها</a>
+                        <a href="about.html" class="nav-item">درباره</a>
+                    </nav>
+                </div>
+                <div class="header-left">
+                    <div class="logo">
+                        <span class="logo-text">ابـزارستـان</span>
+                        <img src="../assets/logo/logo.svg" alt="ابـزارستـان" class="logo-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="bpb-guide-page">
+        <!-- Mobile Sidebar Toggle -->
+        <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="فهرست">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+        </button>
+        
+        <div class="container bpb-container" style="overflow: visible !important;">
+            <div class="bpb-guide-layout bpb-layout-sticky" style="overflow: visible !important;">
+                <!-- Sidebar (Right) -->
+                <aside class="bpb-sidebar bpb-sidebar-sticky" id="bpbSidebar" style="position: sticky; top: 2rem; z-index: 10;">
+                    <div class="sidebar-header">
+                        <h3>فهرست مطالب</h3>
+                        <button class="toggle-sidebar" id="toggleSidebar" aria-label="پنهان کردن فهرست">[پنهان]</button>
+                    </div>
+                    
+                    <nav class="sidebar-nav" id="sidebarNav">
+                        <!-- راهنما -->
+                        <div class="nav-section">
+                            <div class="nav-section-title">راهنمای BPB</div>
+                            <a href="#intro" class="sidebar-link" data-scroll="smooth">
+                                <span class="link-number">۱</span>
+                                <span class="link-text">مقدمه</span>
+                            </a>
+                            <a href="#what-is-bpb" class="sidebar-link" data-scroll="smooth">
+                                <span class="link-number">۲</span>
+                                <span class="link-text">پنل BPB چیست</span>
+                            </a>
+                        </div>
+
+                        <!-- ابزارها -->
+                        <div class="nav-section">
+                            <div class="nav-section-title">ابزارهای دسترسی</div>
+                            <a href="#bpb-wizard" class="sidebar-link" data-scroll="smooth">
+                                <span class="link-number">۳</span>
+                                <span class="link-text">ویزارد</span>
+                            </a>
+                            <a href="#warp" class="sidebar-link" data-scroll="smooth">
+                                <span class="link-number">۴</span>
+                                <span class="link-text">وارپ</span>
+                            </a>
+                            <a href="#ip-scanner" class="sidebar-link" data-scroll="smooth">
+                                <span class="link-number">۵</span>
+                                <span class="link-text">آیپی اسکنر</span>
+                            </a>
+                        </div>
+
+                        <!-- اپلیکیشن‌ها -->
+                        <div class="nav-section">
+                            <div class="nav-section-title">برنامه‌های مورد نیاز</div>
+                            <a href="#apps" class="sidebar-link" data-scroll="smooth">
+                                <span class="link-number">۶</span>
+                                <span class="link-text">اپلیکیشن‌ها</span>
+                            </a>
+                        </div>
+                    </nav>
+                </aside>
+                
+                <!-- Sidebar Overlay -->
+                <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+                <!-- Content (Left) -->
+                <article class="bpb-content">
+                    <section id="intro" class="content-section">
+                        <div class="section-header-with-icon">
+                            <svg class="section-book-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                            <h2>مقدمه</h2>
+                        </div>
+                        <p>شما نباید فقط در درمان‌های حساس و بحرانی نگران امنیت دیجیتال و حریم خصوصی خود باشید.</p>
+                        <p>در حقیقه امروز روزمره ما، توصیه‌هایی در باره‌ی شیوه کار با یک سری ابزار وجود دارد که می‌توانند همیشه، و نه لزوماً زمان به وجود آمدن اختلال در اینترنت، برای امور روزمره از آن‌ها بهره ببرید.</p>
+                        <p>این ابزارها شامل اپلیکیشن‌های مختلف بیمارسان هستند که برای محافظت گفتگوهای شما در برابر دستگاه‌های شنود دولتی و شرکت‌های خصوصی طراحی شده‌اند. همچنین وی‌پی‌ان‌ها و پروکسی‌هایی که می‌توانند در حفظ امنیت شما در فضای آنلاین و گذر از فیلترهای دولتی بکار بیایند.</p>
+                        <div class="info-box">
+                            <div class="info-icon">💡</div>
+                            <div class="info-content">
+                                <strong>نکته مهم:</strong> همیشه به خاطر داشته باشید که استفاده از چنین ابزاری، در صورتی که مسئولان حکومتی آن‌ها را روی دستگاه‌های شما پیدا کنند، می‌تواند ایجاد مشکل کرده و شما را به خطر بیندازد. لذا بهتر است آن‌ها را روی دستگاه‌های خود با احتیاط عمل کنید.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- What is BPB Panel Section -->
+                    <section id="what-is-bpb" class="content-section">
+                        <h2>💦 پنل BPB چیست؟</h2>
+                        <p>BPB Panel یک پنل مدیریتی قدرتمند و رایگان است که بر روی Cloudflare Workers اجرا می‌شود و امکان دسترسی به اینترنت بدون فیلتر را فراهم می‌کند.</p>
+                        
+                        <h3>ویژگی‌های کلیدی:</h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>رایگان و متن‌باز:</strong> کاملاً رایگان و با کد منبع باز
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>بدون نیاز به سرور:</strong> از زیرساخت Cloudflare استفاده می‌کند
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>پشتیبانی از پروتکل‌های مختلف:</strong> VLESS، Trojan، Wireguard
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>رابط کاربری ساده:</strong> پنل مدیریتی آسان و کاربرپسند
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- BPB Wizard Section -->
+                    <section id="bpb-wizard" class="content-section">
+                        <h2>💦 ویزارد BPB</h2>
+                        <p class="wizard-intro">این پروژه با هدف تسهیل فرآیند استقرار و مدیریت BPB Panel و جلوگیری از اشتباهات کاربران در حین استقرار طراحی شده است. این ابزار از هر دو روش Workers و Pages پشتیبانی می‌کند و استفاده از آن به شدت توصیه می‌شود.</p>
+                        
+                        <!-- Wizard Image -->
+                        <div class="wizard-image-container">
+                            <img src="../assets/images/bpb/wizard.jpg" alt="BPB Wizard" class="wizard-image">
+                        </div>
+                        
+                        <h3>درباره ویزارد BPB</h3>
+                        <p>ویزارد BPB یک ابزار کاربرپسند برای نصب و پیکربندی BPB Panel است که تمام مراحل پیچیده را ساده‌سازی می‌کند و از بروز خطاهای رایج جلوگیری می‌کند.</p>
+                        
+                        <div class="info-box">
+                            <div class="info-icon">💡</div>
+                            <div class="info-content">
+                                <strong>چرا از ویزارد استفاده کنیم؟</strong>
+                                <ul>
+                                    <li>نصب خودکار و بدون نیاز به دانش فنی پیشرفته</li>
+                                    <li>پیکربندی آسان با رابط کاربری گرافیکی</li>
+                                    <li>جلوگیری از اشتباهات رایج در فرآیند نصب</li>
+                                    <li>پشتیبانی کامل از Workers و Pages</li>
+                                    <li>راهنمای گام به گام برای کاربران مبتدی</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="cta-box">
+                            <h3>دانلود ویزارد BPB</h3>
+                            <p>آخرین نسخه ویزارد BPB را از GitHub دانلود کنید و نصب را با چند کلیک ساده انجام دهید</p>
+                            <a href="https://github.com/bia-pain-bache/BPB-Wizard/releases/tag/v2.1.8" target="_blank" class="cta-button">
+                                دانلود نسخه v2.1.8
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Warp Section -->
+                    <section id="warp" class="content-section">
+                        <h2>🚀 وارپ (Warp + 1.1.1.1)</h2>
+                        <p>وارپ یک سرویس VPN رایگان و سریع از کلودفلر است که با استفاده از فناوری WireGuard، امنیت و سرعت بالایی را برای کاربران فراهم می‌کند.</p>
+                        
+                        <h3>ویژگی‌های کلیدی وارپ:</h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>رایگان و بدون محدودیت:</strong> استفاده رایگان بدون محدودیت حجم
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>سرعت بالا:</strong> استفاده از پروتکل WireGuard برای سرعت بهینه
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>حفظ حریم خصوصی:</strong> رمزنگاری قوی و عدم ذخیره لاگ
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>آسان و کاربرپسند:</strong> نصب و استفاده بسیار ساده
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="info-box">
+                            <div class="info-icon">💡</div>
+                            <div class="info-content">
+                                <strong>نکته:</strong> وارپ برای دسترسی به اینترنت سریع‌تر و امن‌تر طراحی شده است. این سرویس به شما کمک می‌کند تا با امنیت بیشتری در اینترنت فعالیت کنید.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- IP Scanner Section -->
+                    <section id="ip-scanner" class="content-section">
+                        <h2>🔍 آیپی اسکنر (آیپی تمیز کلودفلر)</h2>
+                        <p>آیپی اسکنر ابزاری است که به شما کمک می‌کند بهترین و سریع‌ترین آیپی‌های کلودفلر را برای اتصال پیدا کنید.</p>
+                        
+                        <h3>چرا به آیپی تمیز نیاز داریم؟</h3>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>سرعت بالاتر:</strong> آیپی‌های تمیز سرعت اتصال بهتری دارند
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>پایداری بیشتر:</strong> اتصال پایدارتر و قطعی کمتر
+                                </div>
+                            </li>
+                            <li>
+                                <span class="feature-icon">✓</span>
+                                <div>
+                                    <strong>دور زدن محدودیت‌ها:</strong> کمک به عبور از فیلترینگ
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="info-box">
+                            <div class="info-icon">💡</div>
+                            <div class="info-content">
+                                <strong>نکته:</strong> برای یافتن بهترین آیپی، از ابزارهای اسکنر استفاده کنید و آیپی‌های مختلف را تست کنید تا بهترین گزینه را پیدا کنید.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Apps Section -->
+                    <section id="apps" class="content-section">
+                        <h2>📱 برنامه‌های مورد نیاز</h2>
+                        <p>برای استفاده از سرور‌های پنل BPB، به اپلیکیشن‌های زیر نیاز دارید:</p>
+                        
+                        <div class="apps-grid">
+                            <!-- iOS Apps -->
+                            <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" target="_blank" class="app-card">
+                                <img src="../assets/images/app-icon/Happ.webp" alt="Happ" class="app-icon-img">
+                                <h4>Happ</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    <span>iOS</span>
+                                </div>
+                            </a>
+                            
+                            <a href="https://apps.apple.com/us/app/streisand/id6450534064" target="_blank" class="app-card">
+                                <img src="../assets/images/app-icon/streisand.webp" alt="Streisand" class="app-icon-img">
+                                <h4>Streisand</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    <span>iOS</span>
+                                </div>
+                            </a>
+                            
+                            <a href="https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690" target="_blank" class="app-card">
+                                <img src="../assets/images/app-icon/v2box.png" alt="V2Box" class="app-icon-img">
+                                <h4>V2Box</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    <span>iOS</span>
+                                </div>
+                            </a>
+                            
+                            <!-- Windows App -->
+                            <a href="https://github.com/lowercase78/V2RayN-PRO/releases/tag/V2RayN-PROV1.9" target="_blank" class="app-card">
+                                <img src="../assets/images/app-icon/v2rayN-Pro.png" alt="v2rayN-Pro" class="app-icon-img">
+                                <h4>v2rayN-Pro</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
+                                    </svg>
+                                    <span>ویندوز</span>
+                                </div>
+                            </a>
+                            
+                            <!-- Android Apps -->
+                            <a href="https://github.com/2dust/v2rayNG/releases" target="_blank" class="app-card">
+                                <img src="../assets/images/app-icon/v2rayNG.png" alt="v2rayNG" class="app-icon-img">
+                                <h4>v2rayNG</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M56 44v4H8v-4a24 24 0 0 1 48 0z"></path>
+                                        <line x1="46.85" y1="25.15" x2="56" y2="16"></line>
+                                        <line x1="17.15" y1="25.15" x2="8" y2="16"></line>
+                                        <line x1="24" y1="32" x2="24" y2="36"></line>
+                                        <line x1="40" y1="32" x2="40" y2="36"></line>
+                                    </svg>
+                                    <span>اندروید</span>
+                                </div>
+                            </a>
+                            
+                            <a href="https://play.google.com/store/apps/details?id=com.happproxy&pcampaignid=web_share" target="_blank" class="app-card">
+                                <img src="../assets/images/app-icon/Happ.webp" alt="Happ" class="app-icon-img">
+                                <h4>Happ</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M56 44v4H8v-4a24 24 0 0 1 48 0z"></path>
+                                        <line x1="46.85" y1="25.15" x2="56" y2="16"></line>
+                                        <line x1="17.15" y1="25.15" x2="8" y2="16"></line>
+                                        <line x1="24" y1="32" x2="24" y2="36"></line>
+                                        <line x1="40" y1="32" x2="40" y2="36"></line>
+                                    </svg>
+                                    <span>اندروید</span>
+                                </div>
+                            </a>
+                            
+                            <div class="app-card app-card-multi">
+                                <img src="../assets/images/app-icon/hiddify.png" alt="Hiddify" class="app-icon-img">
+                                <h4>Hiddify</h4>
+                                <div class="app-platform-wrapper">
+                                    <svg class="platform-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M56 44v4H8v-4a24 24 0 0 1 48 0z"></path>
+                                        <line x1="46.85" y1="25.15" x2="56" y2="16"></line>
+                                        <line x1="17.15" y1="25.15" x2="8" y2="16"></line>
+                                        <line x1="24" y1="32" x2="24" y2="36"></line>
+                                        <line x1="40" y1="32" x2="40" y2="36"></line>
+                                    </svg>
+                                    <span>اندروید</span>
+                                </div>
+                                <div class="app-download-buttons">
+                                    <a href="https://play.google.com/store/apps/details?id=app.hiddify.com" target="_blank" class="download-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        گوگل پلی
+                                    </a>
+                                    <a href="https://hiddify.com/fa/" target="_blank" class="download-btn download-btn-secondary">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                        </svg>
+                                        سایت رسمی
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-icon">💡</div>
+                            <div class="info-content">
+                                <strong>توصیه:</strong> برای بهترین تجربه، از آخرین نسخه اپلیکیشن‌ها استفاده کنید و آن‌ها را از منابع معتبر دانلود نمایید.
+                            </div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../pwa/pwa-init.js"></script>
+    <script src="../js/bpb-guide.js"></script>
+</body>
+</html>

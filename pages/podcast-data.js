@@ -2,11 +2,11 @@
 const podcastEpisodes = {
     1: {
         id: 1,
-        title: 'توسعه هوش مصنوعی در ایران؛ نوآوری در خدمت نظارت',
-        date: '۱۴ آذر ۱۴۰۳',
+        title: 'هامون و مکران؛‌ بدون آب و آنتن',
+        date: '۱۲ خرداد ۱۴۰۳',
         duration: '20:29',
         audioUrl: '#', // Add actual audio URL
-        thumbnail: '../assets/images/laye7/E1.jpg',
+        thumbnail: '../assets/images/laye7/E1.png',
         content: `
             <h2>درباره این اپیزود</h2>
             <p>در این اپیزود به بررسی سامانه سیتام و کنترل بی‌پایان پوشش زبان در ایران پرداخته و از تهدید فزاینده.</p>
@@ -33,8 +33,8 @@ const podcastEpisodes = {
     },
     2: {
         id: 2,
-        title: 'خاموشی پنهان؛ کلیدشکافی استخراجی جدید سرویس دیجیتال در ایران',
-        date: '۱۴ آذر ۱۴۰۳',
+        title: 'تاریخ شفاهی سانسور و مقاومت دیجیتال',
+        date: '۲۹ اردیبهشت ۱۴۰۳',
         duration: '22:15',
         audioUrl: '#',
         thumbnail: '../assets/images/laye7/E2.png',
@@ -56,8 +56,8 @@ const podcastEpisodes = {
     },
     3: {
         id: 3,
-        title: 'VPN در مان بحران؛ از انتخاب ایمن تا اتصال پایدار',
-        date: '۱۴ آذر ۱۴۰۳',
+        title: 'بالماسکه با برادر بزرگ',
+        date: '۱۵ اردیبهشت ۱۴۰۳',
         duration: '25:40',
         audioUrl: '#',
         thumbnail: '../assets/images/laye7/E3.png',
@@ -80,8 +80,8 @@ const podcastEpisodes = {
     },
     4: {
         id: 4,
-        title: 'متصل بمانیم؛ راهنمای ارتباط در زمان بحران',
-        date: '۲۷ شهریور ۱۴۰۲',
+        title: 'پاتو از روی سیم بردار',
+        date: '۱ اردیبهشت ۱۴۰۳',
         duration: '18:45',
         audioUrl: '#',
         thumbnail: '../assets/images/laye7/E4.png',
@@ -100,8 +100,8 @@ const podcastEpisodes = {
     },
     5: {
         id: 5,
-        title: 'پروتکل روز صفر؛ آمادگی پیش از قطع اینترنت',
-        date: '۲۷ شهریور ۱۴۰۲',
+        title: 'ناگهان فَتا؛ درباره بستن صفحه‌های اینستاگرامی',
+        date: '۱۸ فروردین ۱۴۰۳',
         duration: '23:30',
         audioUrl: '#',
         thumbnail: '../assets/images/laye7/E5.png',
@@ -120,8 +120,8 @@ const podcastEpisodes = {
     },
     6: {
         id: 6,
-        title: 'هزار دستان سانسور؛ از فیلتر اینترنت تا پیامک',
-        date: '۱۴ مرداد ۱۴۰۲',
+        title: 'تحت نظارت برادر بزرگ',
+        date: '۴ فروردین ۱۴۰۳',
         duration: '26:10',
         audioUrl: '#',
         thumbnail: '../assets/images/laye7/E6.png',
@@ -141,8 +141,8 @@ const podcastEpisodes = {
     },
     7: {
         id: 7,
-        title: 'جاسوس افزار مرحله جدید سرکوب دیجیتال در ایران',
-        date: '۱۴ مرداد ۱۴۰۲',
+        title: 'استارلینک خوب استارلینک صیانت‌شده است',
+        date: '۱۹ اسفند ۱۴۰۲',
         duration: '24:55',
         audioUrl: '#',
         thumbnail: '../assets/images/laye7/E7.png',
@@ -160,6 +160,21 @@ const podcastEpisodes = {
 
             <h3>راهکارهای محافظت</h3>
             <p>استفاده از نرم‌افزارهای امنیتی معتبر، به‌روزرسانی منظم سیستم‌عامل، و اجتناب از نصب برنامه‌های ناشناخته.</p>
+        `
+    },
+    8: {
+        id: 8,
+        title: 'قسمت صفر: لایه هفتم',
+        date: '۲۸ بهمن ۱۴۰۲',
+        duration: '20:00',
+        audioUrl: '#',
+        thumbnail: '../assets/images/laye7/E0.jpg',
+        content: `
+            <h2>درباره این اپیزود</h2>
+            <p>معرفی پادکست لایه هفتم و موضوعات مورد بحث در این مجموعه.</p>
+            
+            <h3>درباره پادکست لایه هفتم</h3>
+            <p>پادکست لایه هفتم به بررسی موضوعات مرتبط با فیلترینگ، امنیت دیجیتال، و چالش‌های فضای مجازی در ایران می‌پردازد.</p>
         `
     }
 };

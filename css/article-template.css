@@ -48,6 +48,19 @@
     background: rgba(0, 0, 0, 0.3);
 }
 
+/* Section Number Styling with Hover Effect */
+.article-template .section-number {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: bold;
+    margin-left: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.article-template h3:hover .section-number,
+.article-template h2:hover .section-number {
+    color: #9D0913;
+}
+
 .article-template .article-body {
     font-size: 1.1rem;
     line-height: 1.8;

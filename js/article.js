@@ -231,14 +231,16 @@ function setupTocScrolling() {
 function setupArticleFeatures() {
     const articleId = new URLSearchParams(window.location.search).get('id');
     
+    const likeBtnInit = document.querySelector('.like-btn');
     if (localStorage.getItem(`liked_${articleId}`) === 'true') {
         isLiked = true;
-        document.querySelector('.like-btn').classList.add('active');
+        if (likeBtnInit) likeBtnInit.classList.add('active');
     }
     
+    const bookmarkBtnInit = document.querySelector('.bookmark-btn');
     if (localStorage.getItem(`bookmarked_${articleId}`) === 'true') {
         isBookmarked = true;
-        document.querySelector('.bookmark-btn').classList.add('active');
+        if (bookmarkBtnInit) bookmarkBtnInit.classList.add('active');
     }
     
     // Set initial like count
@@ -258,18 +260,19 @@ async function toggleLike() {
     isLiked = !isLiked;
     
     if (isLiked) {
-        likeBtn.classList.add('active');
-        const currentCount = parseInt(likeCountElement.textContent) || 0;
+        if (likeBtn) likeBtn.classList.add('active');
+        const currentCount = (likeCountElement ? parseInt(likeCountElement.textContent) : parseInt(localStorage.getItem(`article_${articleId}_likes`))) || 0;
         const newCount = currentCount + 1;
-        likeCountElement.textContent = newCount;
+        if (likeCountElement) likeCountElement.textContent = newCount;
         localStorage.setItem(`liked_${articleId}`, 'true');
         localStorage.setItem(`article_${articleId}_likes`, newCount.toString());
         
         showToast('مقاله پسندیده شد!', 'success');
     } else {
-        likeBtn.classList.remove('active');
-        const currentCount = Math.max(0, parseInt(likeCountElement.textContent) - 1);
-        likeCountElement.textContent = currentCount;
+        if (likeBtn) likeBtn.classList.remove('active');
+        const currentCountCalc = (likeCountElement ? parseInt(likeCountElement.textContent) : parseInt(localStorage.getItem(`article_${articleId}_likes`))) || 0;
+        const currentCount = Math.max(0, currentCountCalc - 1);
+        if (likeCountElement) likeCountElement.textContent = currentCount;
         localStorage.setItem(`liked_${articleId}`, 'false');
         localStorage.setItem(`article_${articleId}_likes`, currentCount.toString());
         
@@ -285,7 +288,7 @@ async function toggleBookmark() {
     isBookmarked = !isBookmarked;
     
     if (isBookmarked) {
-        bookmarkBtn.classList.add('active');
+        if (bookmarkBtn) bookmarkBtn.classList.add('active');
         localStorage.setItem(`bookmarked_${articleId}`, 'true');
         
         // Save to bookmarks list
@@ -297,7 +300,7 @@ async function toggleBookmark() {
         
         showToast('مقاله ذخیره شد!', 'success');
     } else {
-        bookmarkBtn.classList.remove('active');
+        if (bookmarkBtn) bookmarkBtn.classList.remove('active');
         localStorage.setItem(`bookmarked_${articleId}`, 'false');
         
         // Remove from bookmarks list
@@ -446,6 +449,14 @@ async function getAllArticles() {
         });
     }
     
+    // Article 4: Crypto
+    articles.push({
+        id: '4',
+        title: 'رمز‌ارز جدیدترین ابزار جمهوری اسلامی برای تاب‌آوری در مقابل تحریم‌ها؛ اعمال فشار و محدودیت برای جلوگیری از دور زدن تحریم‌ها',
+        tags: ['رمز‌ارز', 'سیاستگذاری', 'اینترنت', 'فیلترینگ'],
+        category: 'شبکه و سیاستگذاری'
+    });
+    
     return articles;
 }
 
@@ -579,6 +590,9 @@ async function loadComments(articleId) {
 // Display comments
 function displayComments(comments) {
     const container = document.getElementById('comments-list');
+    if (!container) {
+        return;
+    }
     
     if (comments.length === 0) {
         container.innerHTML = '<p style="color: var(--text-muted); text-align: center;">هنوز نظری ثبت نشده است.</p>';
@@ -596,7 +610,11 @@ function displayComments(comments) {
 
 // Submit comment
 async function submitComment() {
-    const commentText = document.getElementById('comment-text').value.trim();
+    const commentInput = document.getElementById('comment-text');
+    if (!commentInput) {
+        return;
+    }
+    const commentText = commentInput.value.trim();
     const articleId = new URLSearchParams(window.location.search).get('id');
     
     if (!commentText) {
@@ -628,7 +646,7 @@ async function submitComment() {
         localStorage.setItem(`article_${articleId}_comments`, (currentCount + 1).toString());
         
         showToast('نظر شما ثبت شد', 'success');
-        document.getElementById('comment-text').value = '';
+        commentInput.value = '';
         displayComments(comments);
         
     } catch (error) {

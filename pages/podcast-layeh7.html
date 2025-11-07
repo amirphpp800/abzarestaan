@@ -11,15 +11,15 @@
     <meta name="theme-color" content="#9D0913">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/assets/logo/logo.svg">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../assets/Font/fontiran.css">
-    <link rel="stylesheet" href="../css/loading.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="/assets/Font/fontiran.css">
+    <link rel="stylesheet" href="/css/loading.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <style>
         .podcast-hero {
             display: grid;
@@ -33,7 +33,7 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 40px;
-            padding: 3rem 2.5rem 3.5rem 2.5rem;
+            padding: 2rem 2rem 2.5rem 2rem;
             position: -webkit-sticky;
             position: sticky;
             top: 100px;
@@ -58,10 +58,10 @@
         }
 
         .podcast-info h1 {
-            font-size: 2.1rem;
+            font-size: 1.8rem;
             color: white;
-            margin-bottom: 2rem;
-            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
             text-align: center;
             font-weight: 700;
             line-height: 1.4;
@@ -69,9 +69,9 @@
         }
 
         .podcast-info p {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.8);
-            line-height: 2.2;
+            line-height: 1.8;
             margin-bottom: 0;
             text-align: center;
             letter-spacing: 0.015em;
@@ -80,8 +80,8 @@
         }
 
         .podcast-icon {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,8 +89,8 @@
         }
 
         .podcast-icon svg {
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             color: rgba(255, 255, 255, 0.95);
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
         }
@@ -343,6 +343,7 @@
                 line-height: 1.8;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
+                line-clamp: 3;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
             }
@@ -499,136 +500,7 @@
     <script src="../js/auto-optimize.js"></script>
     <script src="../js/components.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/mobile-menu.js"></script>
     <script src="../pwa/pwa-init.js"></script>
-    <script>
-        // Episodes data
-        const episodes = [
-            {
-                id: 1,
-                title: 'توسعه هوش مصنوعی در ایران؛ نوآوری در خدمت نظارت',
-                date: '۱۴ آذر ۱۴۰۳',
-                duration: '20:29',
-                description: 'بررسی توسعه هوش مصنوعی در ایران و چالش‌های مربوط به حریم خصوصی و نظارت دولتی',
-                thumbnail: '../assets/images/laye7/E1.jpg'
-            },
-            {
-                id: 2,
-                title: 'خاموشی پنهان؛ کلیدشکافی استخراجی جدید سرویس دیجیتال در ایران',
-                date: '۱۴ آذر ۱۴۰۳',
-                duration: '22:15',
-                description: 'تحلیل روش‌های جدید کلیدشکافی و نظارت بر ارتباطات دیجیتال در ایران',
-                thumbnail: '../assets/images/laye7/E2.png'
-            },
-            {
-                id: 3,
-                title: 'VPN در مان بحران؛ از انتخاب ایمن تا اتصال پایدار',
-                date: '۱۴ آذر ۱۴۰۳',
-                duration: '25:40',
-                description: 'راهنمای جامع انتخاب و استفاده از VPN در شرایط بحرانی و محدودیت‌های اینترنت',
-                thumbnail: '../assets/images/laye7/E3.png'
-            },
-            {
-                id: 4,
-                title: 'متصل بمانیم؛ راهنمای ارتباط در زمان بحران',
-                date: '۲۷ شهریور ۱۴۰۲',
-                duration: '18:45',
-                description: 'بررسی روش‌های ارتباطی جایگزین و راهکارهای عملی برای حفظ ارتباط در شرایط بحرانی',
-                thumbnail: '../assets/images/laye7/E4.png'
-            },
-            {
-                id: 5,
-                title: 'پروتکل روز صفر؛ آمادگی پیش از قطع اینترنت',
-                date: '۲۷ شهریور ۱۴۰۲',
-                duration: '23:30',
-                description: 'آمادگی برای مواجهه با قطعی اینترنت و راهکارهای پیشگیرانه',
-                thumbnail: '../assets/images/laye7/E5.png'
-            },
-            {
-                id: 6,
-                title: 'هزار دستان سانسور؛ از فیلتر اینترنت تا پیامک',
-                date: '۱۴ مرداد ۱۴۰۲',
-                duration: '26:10',
-                description: 'بررسی جامع روش‌های مختلف سانسور و فیلترینگ در ایران',
-                thumbnail: '../assets/images/laye7/E6.png'
-            },
-            {
-                id: 7,
-                title: 'جاسوس افزار مرحله جدید سرکوب دیجیتال در ایران',
-                date: '۱۴ مرداد ۱۴۰۲',
-                duration: '24:55',
-                description: 'تحلیل جاسوس‌افزارها و ابزارهای نظارتی مورد استفاده در ایران',
-                thumbnail: '../assets/images/laye7/E7.png'
-            }
-        ];
-
-        // Load episodes
-        function loadEpisodes() {
-            const container = document.getElementById('episodesList');
-            // Reverse episodes array to show newest first
-            const reversedEpisodes = [...episodes].reverse();
-            container.innerHTML = reversedEpisodes.map(episode => `
-                <a href="podcast-episode.html?id=${episode.id}" class="episode-card">
-                    <div class="episode-thumbnail">
-                        <img src="${episode.thumbnail}" alt="${episode.title}" onerror="this.src='../assets/images/audio.png'">
-                        <div class="play-overlay">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="episode-content">
-                        <div class="episode-header">
-                            <div>
-                                <h3 class="episode-title">${episode.title}</h3>
-                                <div class="episode-date">${episode.date}</div>
-                            </div>
-                        </div>
-                        <p class="episode-description">${episode.description}</p>
-                        <div class="episode-meta">
-                            <div class="meta-item">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
-                                <span>${episode.duration}</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            `).join('');
-        }
-
-        // Load on page load
-        document.addEventListener('DOMContentLoaded', loadEpisodes);
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
-        
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mainNav.classList.toggle('active');
-            });
-
-            // Close menu when clicking on a link
-            const navItems = mainNav.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    mobileMenuBtn.classList.remove('active');
-                    mainNav.classList.remove('active');
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!mainNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
-                    mobileMenuBtn.classList.remove('active');
-                    mainNav.classList.remove('active');
-                }
-            });
-        }
-    </script>
+    <script src="../js/podcast-episodes.js"></script>
 </body>
 </html>

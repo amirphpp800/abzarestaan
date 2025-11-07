@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadAllArticles();
 });
 
-// Article data
+// Article data - این داده‌ها به صورت fallback استفاده می‌شوند
 const articlesData = [
     {
         id: 1,
@@ -34,6 +34,16 @@ const articlesData = [
         readingTime: '15',
         image: '../assets/images/sms.png',
         tags: ['سانسور', 'پیامک', 'فیلترینگ', 'اینترنت']
+    },
+    {
+        id: 4,
+        title: 'رمز‌ارز جدیدترین ابزار جمهوری اسلامی برای تاب‌آوری در مقابل تحریم‌ها؛ اعمال فشار و محدودیت برای جلوگیری از دور زدن تحریم‌ها',
+        excerpt: 'در ماه سپتامبر تنها بر‌ اساس اختلال‌های شناسایی شده،‌ اینترنت ایران در یک ماه معادل ۲۵ روز کامل اختلال را تجربه کرده است.',
+        category: 'شبکه و سیاستگذاری',
+        date: '۱۵ مهر ۱۴۰۴',
+        readingTime: '20',
+        image: '../assets/images/ramzarz/cover.png',
+        tags: ['رمز‌ارز', 'سیاستگذاری', 'اینترنت', 'فیلترینگ']
     }
 ];
 

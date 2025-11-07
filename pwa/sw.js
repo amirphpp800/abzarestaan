@@ -18,7 +18,7 @@ const STATIC_ASSETS = [
   '/pwa/manifest.json',
   '/pwa/icons/256.png',
   '/pwa/icons/512.png',
-  '/favicon.svg'
+  '/assets/logo/logo.svg'
 ];
 
 // نصب Service Worker و کش کردن فایل‌های استاتیک
@@ -82,7 +82,7 @@ function addCacheHeaders(response, url) {
   headers.set('X-Content-Type-Options', 'nosniff');
   headers.set('X-XSS-Protection', '1; mode=block');
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'");
+  headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://platform.twitter.com https://cdn.syndication.twimg.com; style-src 'self' 'unsafe-inline' https://platform.twitter.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://platform.twitter.com https://cdn.syndication.twimg.com; frame-src https://platform.twitter.com");
   headers.set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
   headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   
