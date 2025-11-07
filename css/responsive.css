@@ -3,12 +3,22 @@
 /* Tablet Styles */
 @media (max-width: 1024px) {
     .content-grid {
-        grid-template-columns: 250px 1fr;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .top-cards {
+        grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
     }
     
-    .sidebar {
-        padding: 1rem;
+    .main-sidebar {
+        padding: 1.5rem;
+    }
+    
+    .suggested-thumbnail {
+        width: 90px;
+        height: 90px;
     }
     
     .nav-right {
@@ -17,6 +27,21 @@
     
     .nav-link {
         font-size: 0.85rem;
+    }
+    
+    .feature-card {
+        min-height: 120px;
+        max-height: 150px;
+    }
+    
+    .podcast-icon-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .privacy-banner {
+        width: 200px;
+        height: 180px;
     }
 }
 
@@ -122,22 +147,94 @@
     .feature-card {
         flex-direction: column;
         text-align: center;
-        min-height: 140px;
+        min-height: 200px;
+        max-height: none;
         gap: 1rem;
         padding: 1.5rem;
+    }
+    
+    /* Fix podcast card for mobile */
+    .feature-card.podcast-card {
+        padding: 1.5rem;
+    }
+    
+    .podcast-icon-wrapper {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1rem;
+    }
+    
+    .podcast-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Fix privacy card for mobile */
+    .feature-card.privacy-card {
+        padding: 1.5rem;
+    }
+    
+    .privacy-banner {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 1rem;
+    }
+    
+    .privacy-banner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
     
     .main-sidebar {
         order: 2;
         margin-bottom: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .sidebar-header h3 {
+        font-size: 1.15rem;
+    }
+    
+    .suggested-item {
+        flex-direction: row;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .suggested-thumbnail {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+    
+    .suggested-content h4 {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
     }
 
     .card-btn {
         margin: 0 auto;
     }
     
+    .main-article-section {
+        order: 3;
+    }
+    
+    .main-article-section .article-hero {
+        min-height: 400px;
+    }
+    
     .main-article-section .article-content {
-        padding: 2rem;
+        padding: 2rem 1.5rem;
     }
 
     .main-title {
@@ -149,20 +246,6 @@
         font-size: 1rem;
     }
     
-    .main-sidebar {
-        padding: 1.5rem;
-        margin-top: 1rem;
-    }
-
-    .suggested-item {
-        padding: 1rem;
-        gap: 1rem;
-    }
-
-    .suggested-icon {
-        width: 40px;
-        height: 40px;
-    }
 
     /* Mobile Navigation */
     .header-right .main-nav {
@@ -568,8 +651,10 @@
     }
 
     .suggested-content h4 {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.4;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
     }
 
     .suggested-date {
@@ -580,11 +665,12 @@
     .main-article-section .article-hero {
         flex-direction: column;
         padding: 1.25rem;
+        min-height: 350px;
     }
 
     .article-visual {
         width: 100%;
-        height: 150px;
+        height: 180px;
         margin-bottom: 1rem;
     }
 
@@ -625,45 +711,65 @@
     }
 
     /* Privacy Card */
-    .privacy-card {
+    .feature-card.privacy-card {
         padding: 1.25rem;
+        min-height: 180px;
     }
 
     .privacy-banner {
-        height: 120px;
-        margin-bottom: 1rem;
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1rem;
+    }
+    
+    .privacy-banner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .privacy-card h3 {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     .privacy-card p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        line-height: 1.4;
     }
 
     /* Podcast Card */
-    .podcast-card {
+    .feature-card.podcast-card {
         padding: 1.25rem;
+        min-height: 180px;
     }
 
     .podcast-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 1rem;
+        position: relative;
+        left: auto;
+        bottom: auto;
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 1rem;
     }
 
     .podcast-icon {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
 
     .podcast-card h3 {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 
     .podcast-card p {
-        font-size: 0.85rem;
-        line-height: 1.5;
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    
+    .card-content {
+        text-align: center;
     }
 }
