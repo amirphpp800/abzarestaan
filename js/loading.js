@@ -76,20 +76,22 @@
             hideLoader(loader, bar);
         }
 
-        // Fallback: force hide after 3 seconds
+        // Fallback: force hide after 2 seconds max
         setTimeout(() => {
             if (!loader.classList.contains('hidden')) {
                 hideLoader(loader, bar);
             }
+        }, 2000);
+        
+        // Emergency fallback: ensure content is visible after 3 seconds
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+            document.body.style.opacity = '1';
         }, 3000);
     }
 
-    // Start loading on page load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initLoading);
-    } else {
-        initLoading();
-    }
+    // Start loading immediately
+    initLoading();
 
     // Handle page navigation (for SPA-like behavior)
     window.addEventListener('beforeunload', () => {

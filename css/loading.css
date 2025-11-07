@@ -129,12 +129,17 @@
 
 /* Smooth Page Transition */
 body {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
+/* Only hide body if JavaScript is enabled and loader exists */
+body:has(.page-loader) {
+    opacity: 0;
+}
+
 body.loaded {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 /* Skeleton Loading for Content */

@@ -151,6 +151,7 @@
         max-height: none;
         gap: 1rem;
         padding: 1.5rem;
+        overflow: visible;
     }
     
     /* Fix podcast card for mobile */
@@ -217,8 +218,11 @@
     .suggested-content h4 {
         font-size: 0.9rem;
         line-height: 1.5;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         line-clamp: 2;
+        overflow: hidden;
     }
 
     .card-btn {
@@ -653,8 +657,11 @@
     .suggested-content h4 {
         font-size: 0.8rem;
         line-height: 1.4;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         line-clamp: 2;
+        overflow: hidden;
     }
 
     .suggested-date {

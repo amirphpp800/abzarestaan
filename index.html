@@ -2,9 +2,13 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ابـزارستـان - پلتفرم ابزارهای دیجیتال</title>
     <meta name="description" content="ابزارستان - مجموعه‌ای از بهترین ابزارها و مقالات کاربردی">
+    
+    <!-- DNS Prefetch & Preconnect for faster loading -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 
     <!-- PWA -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -14,6 +18,19 @@
     <link rel="icon" type="image/svg+xml" href="assets/logo/logo.svg">
     <link rel="apple-touch-icon" href="assets/logo/logo.svg">
 
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="assets/Font/fontiran.css" as="style">
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="assets/logo/logo.svg" as="image">
+    
+    <!-- Critical CSS - Inline for faster render -->
+    <style>
+        body{margin:0;padding:0;background:#000;font-family:IRANSans,sans-serif;opacity:1}
+        .page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);display:flex;align-items:center;justify-content:center;z-index:9999}
+        /* Prevent white screen - show content by default */
+        html{background:#000}
+    </style>
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/Font/fontiran.css">
     <link rel="stylesheet" href="css/loading.css">
@@ -21,7 +38,16 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="pwa/pwa-styles.css">
+    <link rel="stylesheet" href="pwa/pwa-styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="pwa/pwa-styles.css"></noscript>
+    
+    <!-- Fallback for no JavaScript -->
+    <noscript>
+        <style>
+            body{opacity:1 !important}
+            .page-loader{display:none !important}
+        </style>
+    </noscript>
 </head>
 <body>
     <!-- Top Header -->
@@ -60,7 +86,7 @@
                 <section class="top-cards">
                     <a href="pages/podcast-layeh7.html" class="feature-card podcast-card" style="text-decoration: none;">
                         <div class="podcast-icon-wrapper">
-                            <img src="assets/images/audio.png" alt="Podcast Icon" class="podcast-icon">
+                            <img src="assets/images/audio.png" alt="Podcast Icon" class="podcast-icon" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>پادکست لایه هفتم</h3>
@@ -70,7 +96,7 @@
 
                     <a href="pages/iran-off.html" class="feature-card privacy-card" style="text-decoration: none;">
                         <div class="privacy-banner">
-                            <img src="assets/images/globe.svg" alt="Globe" class="privacy-banner-img">
+                            <img src="assets/images/globe.svg" alt="Globe" class="privacy-banner-img" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>ایران در خاموشی</h3>
@@ -88,7 +114,7 @@
                     <div class="suggested-articles">
                         <a href="/pages/article.html?id=1" class="suggested-item">
                             <div class="suggested-thumbnail">
-                                <img src="assets/images/ai.png" alt="هوش مصنوعی">
+                                <img src="assets/images/ai.png" alt="هوش مصنوعی" loading="lazy">
                             </div>
                             <div class="suggested-content">
                                 <h4>کنترل به جای نوآوری؛ روایت توسعه نامتوازن هوش مصنوعی در ایران</h4>
@@ -98,7 +124,7 @@
 
                         <a href="/pages/article.html?id=2" class="suggested-item">
                             <div class="suggested-thumbnail">
-                                <img src="assets/images/war.png" alt="جنگ دیجیتال">
+                                <img src="assets/images/war.png" alt="جنگ دیجیتال" loading="lazy">
                             </div>
                             <div class="suggested-content">
                                 <h4>میراث جنگ ۱۲ روزه: غلبه نگاه امنیتی بر اکوسیستم دیجیتال و شبکه اینترنت</h4>
@@ -108,7 +134,7 @@
 
                         <a href="/pages/article.html?id=3" class="suggested-item">
                             <div class="suggested-thumbnail">
-                                <img src="assets/images/sms.png" alt="سانسور پیامک">
+                                <img src="assets/images/sms.png" alt="سانسور پیامک" loading="lazy">
                             </div>
                             <div class="suggested-content">
                                 <h4>از اینترنت تا پیامک؛ گسترش سانسور به آخرین کانال ارتباطی</h4>
@@ -122,7 +148,7 @@
                 <section class="main-article-section">
                     <div class="article-hero">
                         <div class="article-visual">
-                            <img src="assets/images/war.png" alt="میراث جنگ" class="article-hero-image">
+                            <img src="assets/images/war.png" alt="میراث جنگ" class="article-hero-image" loading="eager">
                         </div>
                         <div class="article-content">
                             <div class="article-meta">
@@ -146,7 +172,7 @@
                     </svg>
                 </div>
                 <div class="cyber-main-card">
-                    <img src="assets/images/cyber.png" alt="تهدیدات سایبری" class="cyber-image">
+                    <img src="assets/images/cyber.png" alt="تهدیدات سایبری" class="cyber-image" loading="lazy">
                     <div class="cyber-content">
                         <div class="cyber-badge">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -261,12 +287,12 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts - Optimized Loading -->
     <script src="js/loading.js"></script>
-    <script src="js/auto-optimize.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
-    <script src="pwa/pwa-init.js"></script>
+    <script src="js/auto-optimize.js" defer></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="pwa/pwa-init.js" async></script>
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
