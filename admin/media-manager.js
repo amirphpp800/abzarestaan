@@ -131,8 +131,11 @@ function displayFiles() {
                 </div>
             </div>
             <div class="file-actions">
-                <button class="btn-copy" onclick="showDirectLink('${file.id}')">
-                    دریافت لینک
+                <button class="btn-copy" onclick="downloadFile('${file.id}')">
+                    دانلود فایل
+                </button>
+                <button class="btn-copy" onclick="showDirectLink('${file.id}')" style="background: rgba(59, 130, 246, 0.9);">
+                    کپی لینک
                 </button>
                 <button class="btn-delete" onclick="deleteFile('${file.id}')">
                     🗑️
@@ -230,10 +233,31 @@ function showDirectLink(fileId) {
     const blob = dataURLtoBlob(file.data);
     const url = URL.createObjectURL(blob);
 
-    // For production, you would upload to a server and get a real URL
-    // For now, we'll show the data URL
-    document.getElementById('linkInput').value = file.data;
+    // Create a shareable download link
+    const downloadLink = `${window.location.origin}/download.html?file=${fileId}`;
+    
+    document.getElementById('linkInput').value = downloadLink;
     document.getElementById('linkModal').classList.add('active');
+}
+
+function downloadFile(fileId) {
+    const file = uploadedFiles.find(f => f.id === fileId);
+    if (!file) return;
+
+    // Convert data URL to blob
+    const blob = dataURLtoBlob(file.data);
+    const url = URL.createObjectURL(blob);
+
+    // Create temporary link and trigger download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Clean up the URL object
+    setTimeout(() => URL.revokeObjectURL(url), 100);
 }
 
 function dataURLtoBlob(dataURL) {

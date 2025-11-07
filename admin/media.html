@@ -169,16 +169,18 @@
         .file-actions {
             display: flex;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .btn-copy {
             flex: 1;
+            min-width: 100px;
             padding: 0.75rem;
             background: linear-gradient(135deg, #9D0913 0%, #c70812 100%);
             border: none;
             border-radius: 8px;
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             font-family: 'IRANSans', sans-serif;
             cursor: pointer;
@@ -411,9 +413,12 @@
     <div class="link-modal" id="linkModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>لینک دانلود مستقیم</h3>
+                <h3>لینک دانلود فایل</h3>
                 <button class="modal-close" onclick="closeLinkModal()">✕</button>
             </div>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem; font-size: 0.9rem;">
+                این لینک را کپی کنید و با دیگران به اشتراک بگذارید:
+            </p>
             <input type="text" class="link-input" id="linkInput" readonly>
             <div class="modal-actions">
                 <button class="btn-copy" onclick="copyDirectLink()">کپی لینک</button>
