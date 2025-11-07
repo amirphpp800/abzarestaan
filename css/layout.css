@@ -31,7 +31,7 @@
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: hidden;
 }
 
 .header-content {
@@ -40,6 +40,7 @@
     align-items: center;
     gap: 2rem;
     max-width: 100%;
+    overflow: hidden;
 }
 
 .header-right {
@@ -54,6 +55,7 @@
     gap: 2rem;
     align-items: center;
     flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 .header-left {
