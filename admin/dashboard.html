@@ -203,7 +203,34 @@
         </main>
     </div>
 
+    <!-- Mobile Sidebar Toggle -->
+    <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="منوی کناری">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
     <script src="admin-auth.js"></script>
     <script src="admin-dashboard.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+        const adminSidebar = document.querySelector('.admin-sidebar');
+        
+        if (mobileSidebarToggle && adminSidebar) {
+            mobileSidebarToggle.addEventListener('click', function() {
+                adminSidebar.classList.toggle('active');
+            });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!adminSidebar.contains(event.target) && !mobileSidebarToggle.contains(event.target)) {
+                    adminSidebar.classList.remove('active');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

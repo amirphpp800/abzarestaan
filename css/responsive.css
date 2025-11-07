@@ -168,30 +168,61 @@
     .header-right .main-nav {
         display: none;
         position: absolute;
-        top: 100%;
+        top: calc(100% + 10px);
         left: 0;
         right: 0;
-        background: var(--darker-bg);
+        background: linear-gradient(135deg, rgba(20, 20, 20, 0.98), rgba(10, 10, 10, 0.98));
+        backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 1rem;
-        border-top: 1px solid var(--border-color);
-        gap: 1rem;
+        padding: 1.5rem;
+        border-top: 2px solid var(--primary-color);
+        border-radius: 0 0 20px 20px;
+        gap: 0.5rem;
         z-index: 1000;
-        box-shadow: var(--shadow-lg);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .header-right .main-nav.active {
         display: flex;
     }
 
-    .mobile-menu-btn {
-        display: block !important;
-        background: none;
-        border: none;
+    .header-right .main-nav .nav-item {
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .header-right .main-nav .nav-item:hover {
+        background: rgba(157, 9, 19, 0.15);
+        border-color: var(--primary-color);
         color: white;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0.5rem;
+        box-shadow: 0 4px 12px rgba(157, 9, 19, 0.2);
+    }
+
+    .header-right .main-nav .nav-item:active {
+        transform: scale(0.98);
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Article Page Mobile */
@@ -229,12 +260,151 @@
 
 /* Small Mobile */
 @media (max-width: 480px) {
-    .container-fluid {
-        padding: 0 15px;
+    .container, .container-fluid {
+        padding: 0 12px;
     }
     
     .main-wrapper {
+        padding: 0.75rem 0;
+    }
+
+    /* Header */
+    .top-header {
+        padding: 0.75rem 0;
+    }
+
+    .header-content {
+        gap: 0.5rem;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* Main Content */
+    .main-content {
         padding: 1rem 0;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .page-header p {
+        font-size: 0.9rem;
+    }
+
+    /* Cyber Threats Section */
+    .cyber-threats-section {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .cyber-header h3 {
+        font-size: 1.25rem;
+    }
+
+    .cyber-main-card {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .cyber-image {
+        width: 100%;
+        height: 180px;
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
+    .cyber-content {
+        padding: 1rem;
+    }
+
+    .cyber-content h4 {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .cyber-badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .cyber-meta {
+        font-size: 0.8rem;
+        gap: 0.75rem;
+    }
+
+    .cyber-list {
+        gap: 0.75rem;
+    }
+
+    .cyber-item {
+        padding: 0.875rem;
+    }
+
+    .cyber-number {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .cyber-item h5 {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .cyber-date {
+        font-size: 0.75rem;
+    }
+
+    /* Footer */
+    .site-footer {
+        padding: 2rem 0 1.5rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-section h4 {
+        font-size: 1.1rem;
+    }
+
+    .footer-section p,
+    .footer-links li a,
+    .contact-link {
+        font-size: 0.85rem;
+    }
+
+    .social-links {
+        gap: 0.75rem;
+    }
+
+    .social-link {
+        width: 38px;
+        height: 38px;
+    }
+
+    .social-link svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        padding-top: 1.5rem;
+    }
+
+    .install-pwa-btn {
+        width: 100%;
+        justify-content: center;
     }
 
     /* Tool Cards Small Mobile */
@@ -374,6 +544,126 @@
     }
     
     .info-card {
-        padding: 1.5rem;
+        padding: 1.25rem;
+    }
+
+    /* Suggested Articles Sidebar */
+    .main-sidebar {
+        padding: 1.25rem;
+    }
+
+    .sidebar-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .suggested-item {
+        padding: 0.875rem;
+        gap: 0.75rem;
+    }
+
+    .suggested-thumbnail {
+        width: 55px;
+        height: 55px;
+        border-radius: 8px;
+    }
+
+    .suggested-content h4 {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .suggested-date {
+        font-size: 0.7rem;
+    }
+
+    /* Article Hero Section */
+    .main-article-section .article-hero {
+        flex-direction: column;
+        padding: 1.25rem;
+    }
+
+    .article-visual {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 1rem;
+    }
+
+    .article-hero-image {
+        border-radius: var(--radius-md);
+    }
+
+    .article-content {
+        padding: 0;
+    }
+
+    .main-title {
+        font-size: 1.25rem;
+        line-height: 1.5;
+    }
+
+    .article-summary {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .article-meta {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .read-time,
+    .bookmark-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .read-more-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Privacy Card */
+    .privacy-card {
+        padding: 1.25rem;
+    }
+
+    .privacy-banner {
+        height: 120px;
+        margin-bottom: 1rem;
+    }
+
+    .privacy-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .privacy-card p {
+        font-size: 0.85rem;
+    }
+
+    /* Podcast Card */
+    .podcast-card {
+        padding: 1.25rem;
+    }
+
+    .podcast-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .podcast-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .podcast-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .podcast-card p {
+        font-size: 0.85rem;
+        line-height: 1.5;
     }
 }

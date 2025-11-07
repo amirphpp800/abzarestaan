@@ -175,33 +175,58 @@
     </div>
 
     <script>
-        // Load credentials from .env file
-        const ADMIN_CREDENTIALS = {
-            username: 'admin',
-            password: 'your_secure_password_here'
-        };
-
         const loginForm = document.getElementById('loginForm');
         const errorMessage = document.getElementById('errorMessage');
+        const loginBtn = loginForm.querySelector('.login-btn');
 
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-                // Set session
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                sessionStorage.setItem('adminLoginTime', Date.now());
-                
-                // Redirect to admin panel
-                window.location.href = 'dashboard.html';
-            } else {
+            // Disable button during request
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'در حال ورود...';
+
+            try {
+                // Call the login API
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Set session
+                    sessionStorage.setItem('adminLoggedIn', 'true');
+                    sessionStorage.setItem('adminLoginTime', Date.now());
+                    sessionStorage.setItem('adminToken', data.sessionToken);
+                    
+                    // Redirect to admin panel
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorMessage.textContent = data.message || 'نام کاربری یا رمز عبور اشتباه است';
+                    errorMessage.classList.add('show');
+                    setTimeout(() => {
+                        errorMessage.classList.remove('show');
+                    }, 3000);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                errorMessage.textContent = 'خطا در برقراری ارتباط با سرور';
                 errorMessage.classList.add('show');
                 setTimeout(() => {
                     errorMessage.classList.remove('show');
                 }, 3000);
+            } finally {
+                // Re-enable button
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'ورود به پنل';
             }
         });
 
@@ -217,6 +242,7 @@
             } else {
                 sessionStorage.removeItem('adminLoggedIn');
                 sessionStorage.removeItem('adminLoginTime');
+                sessionStorage.removeItem('adminToken');
             }
         }
     </script>
