@@ -366,26 +366,11 @@
 }
 
 .related-item:hover {
-    color: var(--primary-color);
     padding-right: 0.5rem;
 }
 
-.related-item::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.related-item:hover::before {
-    opacity: 1;
+.related-item:hover .related-item-title {
+    color: var(--primary-color);
 }
 
 .related-item-number {
@@ -400,12 +385,12 @@
     font-weight: 600;
     color: var(--text-secondary);
     flex-shrink: 0;
-    transition: all 0.3s ease;
+    transition: font-size 0.3s ease, font-weight 0.3s ease;
 }
 
 .related-item:hover .related-item-number {
-    background: var(--primary-color);
-    color: white;
+    font-size: 1.15rem;
+    font-weight: 700;
 }
 
 .related-item-content {
