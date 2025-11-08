@@ -237,130 +237,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Mobile menu functionality
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
+    // Mobile menu functionality is now handled by inline script in HTML
+    // to avoid conflicts and ensure proper execution order
     
-    if (mobileMenuBtn && mainNav) {
-        mobileMenuBtn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mainNav.classList.toggle('active');
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !mainNav.contains(e.target)) {
-                mobileMenuBtn.classList.remove('active');
-                mainNav.classList.remove('active');
-            }
-        });
-    }
+    // Mobile sidebar toggle functionality is now handled by inline script in HTML
+    // to avoid conflicts and ensure proper execution order
     
-    // Mobile sidebar toggle functionality
-    const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
-    
-    function toggleMobileSidebar() {
-        if (sidebar && sidebarOverlay) {
-            const isActive = sidebar.classList.contains('active');
-            
-            if (isActive) {
-                // Close sidebar
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
-                document.body.classList.remove('sidebar-open');
-                
-                // If a section was selected in the sidebar, scroll to it
-                if (window.targetSectionId) {
-                    const targetSection = document.querySelector(window.targetSectionId);
-                    if (targetSection) {
-                        setTimeout(() => {
-                            targetSection.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                            // Clear the target section ID
-                            window.targetSectionId = null;
-                        }, 300);
-                    }
-                }
-            } else {
-                // Open sidebar
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-                document.body.classList.add('sidebar-open');
-            }
-        }
-    }
-    
-    if (mobileSidebarToggle) {
-        // Add both click and touchstart events for better mobile support
-        mobileSidebarToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile sidebar toggle clicked');
-            toggleMobileSidebar();
-        });
-        
-        mobileSidebarToggle.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Mobile sidebar toggle touched');
-            toggleMobileSidebar();
-        }, { passive: false });
-        
-        // Ensure the toggle button is always clickable
-        mobileSidebarToggle.style.pointerEvents = 'auto';
-        mobileSidebarToggle.style.zIndex = '1002';
-        mobileSidebarToggle.style.cursor = 'pointer';
-        mobileSidebarToggle.style.userSelect = 'none';
-        mobileSidebarToggle.style.webkitUserSelect = 'none';
-        mobileSidebarToggle.style.webkitTapHighlightColor = 'transparent';
-        
-        console.log('Mobile sidebar toggle initialized');
-    } else {
-        console.error('Mobile sidebar toggle button not found!');
-    }
-    
-    // Close sidebar when clicking overlay
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Overlay clicked');
-            if (sidebar) {
-                sidebar.classList.remove('active');
-            }
-            sidebarOverlay.classList.remove('active');
-            document.body.classList.remove('sidebar-open');
-            
-            // If a section was selected in the sidebar, scroll to it
-            if (window.targetSectionId) {
-                const targetSection = document.querySelector(window.targetSectionId);
-                if (targetSection) {
-                    setTimeout(() => {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        // Clear the target section ID
-                        window.targetSectionId = null;
-                    }, 300);
-                }
-            }
-        });
-        
-        // Add touchstart for better mobile support
-        sidebarOverlay.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Overlay touched');
-            if (sidebar) {
-                sidebar.classList.remove('active');
-            }
-            sidebarOverlay.classList.remove('active');
-            document.body.classList.remove('sidebar-open');
-        }, { passive: false });
-    }
+    // Close sidebar when clicking overlay is now handled by inline script in HTML
+    // to avoid conflicts and ensure proper execution order
     
     // We're removing the automatic closing of sidebar when clicking links
     // This allows users to navigate through the sidebar without it closing

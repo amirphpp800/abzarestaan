@@ -51,7 +51,12 @@ const articlesData = [
 async function loadAllArticles() {
     const container = document.getElementById('articles-container');
     
-    if (!container) return;
+    if (!container) {
+        console.error('Articles container not found!');
+        return;
+    }
+    
+    console.log('Loading articles...', articlesData.length);
     
     // Clear loading message
     container.innerHTML = '';
@@ -60,7 +65,10 @@ async function loadAllArticles() {
     articlesData.forEach(article => {
         const articleCard = createArticleCard(article);
         container.appendChild(articleCard);
+        console.log('Article card created:', article.title);
     });
+    
+    console.log('All articles loaded successfully!');
 }
 
 // Create article card element

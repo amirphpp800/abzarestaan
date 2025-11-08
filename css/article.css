@@ -244,7 +244,7 @@
 .toc-card a.active {
     color: var(--primary-color);
     border-right-color: var(--primary-color);
-    background: rgba(157, 9, 19, 0.1);
+    background: rgba(224, 47, 58, 0.1);
     border-radius: var(--radius-sm);
 }
 
@@ -633,7 +633,7 @@
 .action-btn:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
-    background: rgba(157, 9, 19, 0.1);
+    background: rgba(224, 47, 58, 0.1);
 }
 
 .action-btn.active {

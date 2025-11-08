@@ -17,8 +17,117 @@
     <link rel="stylesheet" href="../assets/Font/fontiran.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/components.css?v=3">
     <link rel="stylesheet" href="../css/responsive.css">
+    
+    <!-- Force cache refresh -->
+    <style>
+        /* Force new styles - v3 */
+        .article-card {
+            background: var(--card-bg) !important;
+            border-radius: var(--radius-lg) !important;
+            overflow: hidden !important;
+            transition: all 0.3s ease !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3) !important;
+            border-color: rgba(224, 47, 58, 0.3) !important;
+        }
+        
+        .article-card-link {
+            text-decoration: none !important;
+            color: inherit !important;
+            display: block !important;
+        }
+        
+        .article-card-image {
+            position: relative !important;
+            width: 100% !important;
+            height: 180px !important;
+            overflow: hidden !important;
+        }
+        
+        .article-card-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transition: transform 0.3s ease !important;
+        }
+        
+        .article-card:hover .article-card-image img {
+            transform: scale(1.05) !important;
+        }
+        
+        .article-category-badge {
+            position: absolute !important;
+            top: 1rem !important;
+            right: 1rem !important;
+            background: var(--primary-color) !important;
+            color: white !important;
+            padding: 0.4rem 1rem !important;
+            border-radius: 20px !important;
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+        }
+        
+        .article-card-content {
+            padding: 1.5rem !important;
+        }
+        
+        .article-card-title {
+            font-size: 1.3rem !important;
+            font-weight: bold !important;
+            margin-bottom: 0.75rem !important;
+            line-height: 1.4 !important;
+            color: var(--text-primary) !important;
+            display: -webkit-box !important;
+            /* -webkit-line-clamp: 2 !important; */
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+            transition: color 0.3s ease !important;
+        }
+        
+        .article-card:hover .article-card-title {
+            color: var(--primary-color) !important;
+        }
+        
+        .article-card-excerpt {
+            font-size: 0.95rem !important;
+            color: var(--text-secondary) !important;
+            line-height: 1.6 !important;
+            margin-bottom: 1rem !important;
+            display: -webkit-box !important;
+            /* -webkit-line-clamp: 3 !important; */
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+        }
+        
+        .article-card-meta {
+            display: flex !important;
+            gap: 1.5rem !important;
+            margin-bottom: 1rem !important;
+            font-size: 0.85rem !important;
+            color: var(--text-secondary) !important;
+        }
+        
+        .article-card-tags {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 0.5rem !important;
+        }
+        
+        .article-card-tags .tag {
+            background: rgba(224, 47, 58, 0.1) !important;
+            color: var(--primary-color) !important;
+            padding: 0.3rem 0.75rem !important;
+            border-radius: 12px !important;
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Top Header -->
@@ -68,10 +177,10 @@
 
     <!-- Scripts -->
     <script src="../js/auto-optimize.js"></script>
-    <script src="../js/components.js"></script>
+    <script src="../js/components.js?v=3"></script>
     <script src="../js/main.js"></script>
     <script src="../js/mobile-menu.js"></script>
-    <script src="../js/articles-loader.js"></script>
+    <script src="../js/articles-loader.js?v=3"></script>
     <script src="../pwa/pwa-init.js"></script>
 </body>
 </html>

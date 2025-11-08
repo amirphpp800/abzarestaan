@@ -37,6 +37,11 @@ class AutoOptimizer {
 
     // Preload critical resources
     setupPreloading() {
+        // Disabled for file:// protocol to avoid CORS issues
+        if (window.location.protocol === 'file:') {
+            return;
+        }
+        
         const criticalResources = [
             { href: '/css/main.css', as: 'style' },
             { href: '/js/main.js', as: 'script' },
@@ -54,14 +59,21 @@ class AutoOptimizer {
 
     // Auto compression detection and handling
     setupCompression() {
+        // Disabled for file:// protocol to avoid CORS issues
+        if (window.location.protocol === 'file:') {
+            return;
+        }
+        
         // Check if browser supports modern formats
         this.supportsWebP = this.checkWebPSupport();
         this.supportsAvif = this.checkAvifSupport();
-        
-        // Auto replace images with optimized versions if available
-        document.querySelectorAll('img').forEach(img => {
-            if (img.src && !img.dataset.optimized) {
+
+        // Optimize all images on page
+        document.querySelectorAll('img:not([data-optimized])').forEach(img => {
+            if (img.complete) {
                 this.optimizeImage(img);
+            } else {
+                img.addEventListener('load', () => this.optimizeImage(img));
             }
         });
     }

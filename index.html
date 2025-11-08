@@ -51,6 +51,32 @@
     </noscript>
 </head>
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div style="text-align: center;">
+            <div class="loading-spinner" style="width: 60px; height: 60px; border: 5px solid rgba(157, 9, 19, 0.1); border-top: 5px solid #9D0913; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1.5rem;"></div>
+            <img src="assets/logo/logo.svg" alt="ابزارستان" style="width: 80px; height: 80px; margin-bottom: 1rem; opacity: 0.9;">
+            <h2 style="color: #fff; font-size: 1.5rem; margin: 0 0 0.5rem 0; font-weight: 700;">ابزارستان</h2>
+            <p style="color: rgba(255,255,255,0.7); font-size: 1rem; margin: 0;">در حال بارگذاری...</p>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .page-loader {
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+    
     <!-- Top Header -->
     <header class="top-header">
         <div class="container">
@@ -377,13 +403,14 @@
         </div>
     </footer>
 
-    <!-- Scripts - Optimized Loading -->
-    <script src="js/loading.js"></script>
-    <script src="js/auto-optimize.js" defer></script>
-    <script src="js/components.js" defer></script>
-    <script src="js/search.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="pwa/pwa-init.js" async></script>
+    <!-- Scripts -->
+    <script src="js/page-transitions.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/auto-optimize.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="pwa/pwa-init.js"></script>
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -501,7 +528,7 @@
                 // نمایش 3 مقاله جدید (بعد از آخرین مقاله که در hero نمایش داده شد)
                 const latestArticles = allArticles.slice(0, 3);
                 
-                // ساخت HTML برای هر مقاله
+                // ساخت HTML برای هر مقاله با استایل جدید
                 const articlesHTML = latestArticles.map((article, index) => `
                     <a href="pages/article.html?id=${article.id}" class="cyber-item">
                         <span class="cyber-number">${['۱', '۲', '۳'][index]}</span>
@@ -517,6 +544,19 @@
             } else {
                 console.error('Container not found!');
             }
+        });
+        
+        // Hide page loader after 3 seconds
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const pageLoader = document.getElementById('pageLoader');
+                if (pageLoader) {
+                    pageLoader.classList.add('hidden');
+                    setTimeout(function() {
+                        pageLoader.style.display = 'none';
+                    }, 500);
+                }
+            }, 3000); // 3 seconds delay
         });
     </script>
 </body>

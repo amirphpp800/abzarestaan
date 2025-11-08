@@ -27,8 +27,8 @@ async function loadArticle(articleId) {
     try {
         showLoadingState();
         
-        // Load article HTML file
-        const articlePath = `/data/articles/article-${articleId}.html`;
+        // Load article HTML file - use relative path
+        const articlePath = `../data/articles/article-${articleId}.html`;
         const response = await fetch(articlePath);
         
         if (!response.ok) {
@@ -45,15 +45,19 @@ async function loadArticle(articleId) {
             throw new Error('Invalid article format');
         }
         
-        // Extract content from the new structure
-        const contentElement = doc.querySelector('.article-body-content') || doc.querySelector('.article-body');
-        if (!contentElement) {
-            throw new Error('Article content not found');
+        // Get the complete article content container
+        const articleContainer = doc.querySelector('.article-content-container');
+        if (articleContainer) {
+            // Inject the complete article structure
+            const mainContainer = document.querySelector('.article-layout') || document.querySelector('.container');
+            if (mainContainer) {
+                mainContainer.innerHTML = articleContainer.outerHTML;
+            }
         }
         
         const article = {
             id: articleElement.getAttribute('data-id'),
-            title: doc.querySelector('h1').textContent,
+            title: doc.querySelector('h1')?.textContent || 'بدون عنوان',
             category: articleElement.getAttribute('data-category'),
             author: articleElement.getAttribute('data-author'),
             date: articleElement.getAttribute('data-date'),
@@ -61,17 +65,15 @@ async function loadArticle(articleId) {
             excerpt: articleElement.getAttribute('data-excerpt'),
             tags: (articleElement.getAttribute('data-tags') || '').split(',').map(t => t.trim()).filter(t => t),
             featured: articleElement.getAttribute('data-featured') === 'true',
-            content: contentElement.innerHTML,
-            featuredImage: doc.querySelector('.article-image')?.src || doc.querySelector('.article-image')?.getAttribute('src') || '../assets/images/war.png',
             views: parseInt(localStorage.getItem(`article_${articleId}_views`)) || 0,
             likes: parseInt(localStorage.getItem(`article_${articleId}_likes`)) || 0,
             comments: parseInt(localStorage.getItem(`article_${articleId}_comments`)) || 0
         };
         
         currentArticle = article;
-        populateArticleContent(article);
         updatePageMeta(article);
         incrementViews(articleId);
+        hideLoadingState();
         
     } catch (error) {
         console.error('Error loading article:', error);
@@ -687,7 +689,10 @@ function showLoadingState() {
 function hideLoadingState() {
     const loadingEl = document.querySelector('.content-loading');
     if (loadingEl) {
-        loadingEl.style.display = 'none';
+        loadingEl.classList.add('fade-out');
+        setTimeout(() => {
+            loadingEl.style.display = 'none';
+        }, 300);
     }
 }
 

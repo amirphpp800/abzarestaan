@@ -9,47 +9,41 @@ class ArticleCard {
     render() {
         return `
             <article class="article-card" data-id="${this.article.id}">
-                ${this.article.featured ? '<div class="featured-badge">ویژه</div>' : ''}
-                <div class="article-image">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                        <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">${this.article.title}</h3>
-                    <p class="article-excerpt">${this.article.excerpt}</p>
-                    <div class="article-meta">
-                        <div class="article-date">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V8H19V19ZM7 10H17V12H7V10ZM7 14H14V16H7V14Z" fill="currentColor"/>
-                            </svg>
-                            <span>${this.article.date}</span>
-                        </div>
-                        <div class="article-category">${this.article.category}</div>
+                <a href="/pages/article.html?id=${this.article.id}" class="article-card-link">
+                    <div class="article-card-image">
+                        <img src="${this.article.image || '/assets/images/default-article.png'}" alt="${this.article.title}" loading="lazy">
+                        <span class="article-category-badge">${this.article.category}</span>
                     </div>
-                    <div class="article-actions">
-                        <a href="/pages/article.html?id=${this.article.id}" target="_blank" class="read-more">
-                            مطالعه کامل
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <div class="article-stats">
-                            <div class="stat-item">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5S21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12S9.24 7 12 7S17 9.24 17 12S14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12S10.34 15 12 15S15 13.66 15 12S13.66 9 12 9Z" fill="currentColor"/>
+                    <div class="article-card-content">
+                        <h3 class="article-card-title">${this.article.title}</h3>
+                        <p class="article-card-excerpt">${this.article.excerpt}</p>
+                        <div class="article-card-meta">
+                            <span class="article-date">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
                                 </svg>
-                                <span class="english">${this.article.views || 0}</span>
-                            </div>
-                            <div class="stat-item">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                                    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z" fill="currentColor"/>
+                                ${this.article.date}
+                            </span>
+                            ${this.article.readingTime ? `
+                            <span class="article-reading-time">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
-                                <span class="english">${this.article.comments || 0}</span>
-                            </div>
+                                ${this.article.readingTime} دقیقه
+                            </span>
+                            ` : ''}
                         </div>
+                        ${this.article.tags && this.article.tags.length > 0 ? `
+                        <div class="article-card-tags">
+                            ${this.article.tags.slice(0, 4).map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                        </div>
+                        ` : ''}
                     </div>
-                </div>
+                </a>
             </article>
         `;
     }

@@ -13,7 +13,7 @@
 .article-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-    border-color: rgba(157, 9, 19, 0.3);
+    border-color: rgba(224, 47, 58, 0.3);
 }
 
 .article-card:hover .article-card-title {
@@ -118,7 +118,7 @@
 }
 
 .article-card-tags .tag {
-    background: rgba(157, 9, 19, 0.1);
+    background: rgba(224, 47, 58, 0.1);
     color: var(--primary-color);
     padding: 0.3rem 0.75rem;
     border-radius: 12px;
@@ -219,7 +219,7 @@
 
 .tool-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(157, 9, 19, 0.2);
+    box-shadow: 0 10px 30px rgba(224, 47, 58, 0.2);
 }
 
 .tool-card .tool-icon {
@@ -232,7 +232,7 @@
     justify-content: center;
     margin-bottom: 1rem;
     font-size: 2.25rem;
-    box-shadow: 0 4px 12px rgba(157, 9, 19, 0.25);
+    box-shadow: 0 4px 12px rgba(224, 47, 58, 0.25);
     position: relative;
     z-index: 1;
     transition: all 0.3s ease;
@@ -240,7 +240,7 @@
 
 .tool-card:hover .tool-icon {
     transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(157, 9, 19, 0.35);
+    box-shadow: 0 6px 16px rgba(224, 47, 58, 0.35);
 }
 
 .tools-logo {
@@ -290,7 +290,7 @@
 .tool-version {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: rgba(157, 9, 19, 0.1);
+    background: rgba(224, 47, 58, 0.1);
     color: var(--primary-color);
     border-radius: 20px;
     font-size: 0.75rem;
@@ -331,9 +331,9 @@
     text-align: right;
     margin-bottom: 2rem;
     padding: 2rem;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(157, 9, 19, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(224, 47, 58, 0.05) 100%);
     border-radius: 16px;
-    border: 1px solid rgba(157, 9, 19, 0.2);
+    border: 1px solid rgba(224, 47, 58, 0.2);
     width: 100%;
     position: relative;
     z-index: 1;
@@ -348,7 +348,7 @@
     font-weight: 700;
     text-align: center;
     padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(157, 9, 19, 0.3);
+    border-bottom: 2px solid rgba(224, 47, 58, 0.3);
 }
 
 .tool-features p {
@@ -409,7 +409,7 @@
     transition: all 0.3s ease;
     position: relative;
     z-index: 1;
-    box-shadow: 0 4px 12px rgba(157, 9, 19, 0.3);
+    box-shadow: 0 4px 12px rgba(224, 47, 58, 0.3);
     text-align: center;
 }
 
@@ -463,7 +463,7 @@
     padding: 2.5rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid rgba(157, 9, 19, 0.2);
+    border: 2px solid rgba(224, 47, 58, 0.2);
 }
 
 .modal-content::-webkit-scrollbar {
@@ -491,7 +491,7 @@
     width: 40px;
     height: 40px;
     border: none;
-    background: rgba(157, 9, 19, 0.1);
+    background: rgba(224, 47, 58, 0.1);
     color: var(--text-primary);
     font-size: 1.5rem;
     border-radius: 50%;
@@ -513,7 +513,7 @@
     text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 2px solid rgba(157, 9, 19, 0.2);
+    border-bottom: 2px solid rgba(224, 47, 58, 0.2);
 }
 
 .modal-header .modal-icon {
