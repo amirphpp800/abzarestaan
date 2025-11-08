@@ -45,6 +45,12 @@ async function loadArticle(articleId) {
             throw new Error('Invalid article format');
         }
         
+        // Extract content from the new structure
+        const contentElement = doc.querySelector('.article-body-content') || doc.querySelector('.article-body');
+        if (!contentElement) {
+            throw new Error('Article content not found');
+        }
+        
         const article = {
             id: articleElement.getAttribute('data-id'),
             title: doc.querySelector('h1').textContent,
@@ -55,7 +61,7 @@ async function loadArticle(articleId) {
             excerpt: articleElement.getAttribute('data-excerpt'),
             tags: (articleElement.getAttribute('data-tags') || '').split(',').map(t => t.trim()).filter(t => t),
             featured: articleElement.getAttribute('data-featured') === 'true',
-            content: doc.querySelector('.article-body').innerHTML,
+            content: contentElement.innerHTML,
             featuredImage: doc.querySelector('.article-image')?.src || doc.querySelector('.article-image')?.getAttribute('src') || '../assets/images/war.png',
             views: parseInt(localStorage.getItem(`article_${articleId}_views`)) || 0,
             likes: parseInt(localStorage.getItem(`article_${articleId}_likes`)) || 0,

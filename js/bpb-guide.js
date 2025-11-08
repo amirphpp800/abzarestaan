@@ -293,20 +293,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (mobileSidebarToggle) {
+        // Add both click and touchstart events for better mobile support
         mobileSidebarToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            console.log('Mobile sidebar toggle clicked');
             toggleMobileSidebar();
         });
+        
+        mobileSidebarToggle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Mobile sidebar toggle touched');
+            toggleMobileSidebar();
+        }, { passive: false });
         
         // Ensure the toggle button is always clickable
         mobileSidebarToggle.style.pointerEvents = 'auto';
         mobileSidebarToggle.style.zIndex = '1002';
+        mobileSidebarToggle.style.cursor = 'pointer';
+        mobileSidebarToggle.style.userSelect = 'none';
+        mobileSidebarToggle.style.webkitUserSelect = 'none';
+        mobileSidebarToggle.style.webkitTapHighlightColor = 'transparent';
+        
+        console.log('Mobile sidebar toggle initialized');
+    } else {
+        console.error('Mobile sidebar toggle button not found!');
     }
     
     // Close sidebar when clicking overlay
     if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', function() {
+        sidebarOverlay.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Overlay clicked');
             if (sidebar) {
                 sidebar.classList.remove('active');
             }
@@ -328,6 +348,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+        
+        // Add touchstart for better mobile support
+        sidebarOverlay.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Overlay touched');
+            if (sidebar) {
+                sidebar.classList.remove('active');
+            }
+            sidebarOverlay.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        }, { passive: false });
     }
     
     // We're removing the automatic closing of sidebar when clicking links
