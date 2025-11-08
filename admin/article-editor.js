@@ -189,8 +189,9 @@ async function saveArticleForm(status) {
         return;
     }
 
+    const articleId = currentArticleId || generateId();
     const article = {
-        id: currentArticleId || generateId(),
+        id: articleId,
         title,
         slug: slug || generateSlug(title),
         category,
@@ -207,8 +208,113 @@ async function saveArticleForm(status) {
     // Save using KV storage
     await saveArticle(article);
 
+    // If published, create HTML file and save to backup
+    if (status === 'published') {
+        const htmlContent = generateArticleHTML(article);
+        saveHTMLFile(article, htmlContent);
+        
+        // Save to backup
+        saveToBackup(article, htmlContent);
+    }
+
     alert(status === 'published' ? 'مقاله با موفقیت منتشر شد!' : 'پیش‌نویس ذخیره شد!');
     window.location.href = 'articles.html';
+}
+
+// Generate HTML file for article
+function generateArticleHTML(article) {
+    const persianDate = new Date(article.date).toLocaleDateString('fa-IR');
+    
+    return `<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${article.title} - ابزارستان</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/article.css">
+    <link rel="stylesheet" href="../../css/article-template.css">
+</head>
+<body class="article-template">
+    <article 
+        data-id="${article.id}" 
+        data-category="${article.category}" 
+        data-author="${article.author}" 
+        data-date="${persianDate}" 
+        data-reading-time="10"
+        data-excerpt="${article.excerpt}"
+        data-tags="${article.tags.join(',')}"
+        data-featured="false">
+        
+        <header class="article-meta" data-category="${article.category}">
+            <img class="article-image" src="${article.coverImage || '../../assets/images/default-cover.png'}" alt="${article.title}">
+            <h1>${article.title}</h1>
+        </header>
+
+        <div class="article-meta-info">
+            <div class="article-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span><strong>تاریخ:</strong> ${persianDate}</span>
+            </div>
+            <div class="article-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span><strong>نویسنده:</strong> ${article.author}</span>
+            </div>
+            <div class="article-meta-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span><strong>زمان مطالعه:</strong> 10 دقیقه</span>
+            </div>
+        </div>
+
+        <main class="article-body">
+            ${article.content}
+        </main>
+    </article>
+</body>
+</html>`;
+}
+
+// Save HTML file (download)
+function saveHTMLFile(article, htmlContent) {
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `article-${article.id}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Save to backup (localStorage)
+function saveToBackup(article, htmlContent) {
+    const backups = JSON.parse(localStorage.getItem('articleBackups') || '[]');
+    
+    backups.push({
+        id: article.id,
+        title: article.title,
+        htmlContent: htmlContent,
+        timestamp: new Date().toISOString()
+    });
+    
+    // Keep only last 50 backups
+    if (backups.length > 50) {
+        backups.shift();
+    }
+    
+    localStorage.setItem('articleBackups', JSON.stringify(backups));
 }
 
 function generateId() {

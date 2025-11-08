@@ -209,23 +209,52 @@
     .main-sidebar {
         order: 2;
         margin-bottom: 1.5rem;
-        padding: 1.5rem;
+        margin-left: -16px;
+        margin-right: -16px;
+        padding: 1.5rem 16px;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
     }
     
+    .sidebar-header {
+        border-bottom: none !important;
+        padding-bottom: 1rem;
+    }
+
     .sidebar-header h3 {
         font-size: 1.15rem;
     }
     
     .suggested-item {
         flex-direction: row;
-        padding: 1rem;
+        padding: 1rem 0;
         gap: 1rem;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .suggested-item:hover {
+        background: transparent !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .suggested-item:last-child {
+        border-bottom: none;
     }
     
     .suggested-thumbnail {
         width: 80px;
         height: 80px;
         flex-shrink: 0;
+        border-radius: 8px;
     }
     
     .suggested-content h4 {
@@ -251,7 +280,11 @@
     }
     
     .main-article-section .article-content {
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 40%, rgba(0, 0, 0, 0.65) 70%, transparent 100%);
         padding: 2rem 1.5rem;
+        width: 100%;
     }
 
     .main-title {
@@ -472,6 +505,46 @@
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
+
+    /* Articles Grid - Remove card borders on mobile */
+    .articles-grid {
+        gap: 0;
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+
+    .article-card {
+        border: none !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: var(--card-bg);
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .article-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .article-card:last-child {
+        border-bottom: none;
+    }
+
+    .article-card-image {
+        border-radius: 0 !important;
+        height: 140px;
+    }
+
+    .article-card-content {
+        padding: 1.5rem 16px;
+    }
+
+    /* Fix homepage hero overlay on mobile */
+    .main-article-section .article-content {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 40%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+        padding: 2.5rem 1.5rem;
+    }
 }
 
 /* Small Mobile */
@@ -513,6 +586,39 @@
 
     .page-header p {
         font-size: 0.9rem;
+    }
+
+    /* Articles Grid - Remove card borders on mobile */
+    .articles-grid {
+        gap: 0;
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+
+    .article-card {
+        border: none !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .article-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .article-card:last-child {
+        border-bottom: none;
+    }
+
+    .article-card-image {
+        border-radius: 0 !important;
+        height: 120px;
+    }
+
+    .article-card-content {
+        padding: 1.25rem 12px;
     }
 
     /* Cyber Threats Section */
@@ -765,7 +871,18 @@
 
     /* Suggested Articles Sidebar */
     .main-sidebar {
-        padding: 1.25rem;
+        margin-left: -12px;
+        margin-right: -12px;
+        padding: 1.25rem 12px;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .sidebar-header {
+        border-bottom: none !important;
+        padding-bottom: 0.75rem;
     }
 
     .sidebar-header h3 {
@@ -773,14 +890,31 @@
     }
 
     .suggested-item {
-        padding: 0.875rem;
+        padding: 0.875rem 0;
         gap: 0.75rem;
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: none !important;
+        transform: none !important;
+    }
+
+    .suggested-item:hover {
+        background: transparent !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .suggested-item:last-child {
+        border-bottom: none;
     }
 
     .suggested-thumbnail {
         width: 55px;
         height: 55px;
-        border-radius: 8px;
+        border-radius: 6px;
     }
 
     .suggested-content h4 {
@@ -799,23 +933,31 @@
 
     /* Article Hero Section */
     .main-article-section .article-hero {
-        flex-direction: column;
-        padding: 1.25rem;
         min-height: 350px;
     }
 
     .article-visual {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
-        height: 180px;
-        margin-bottom: 1rem;
+        height: 100%;
     }
 
     .article-hero-image {
-        border-radius: var(--radius-md);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    .article-content {
-        padding: 0;
+    .main-article-section .article-content {
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.9) 35%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.3) 85%, transparent 100%);
+        padding: 2rem 1.25rem;
+        width: 100%;
     }
 
     .main-title {

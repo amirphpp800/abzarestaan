@@ -8,44 +8,114 @@
     line-height: 1.6;
     direction: rtl;
     padding: 2rem;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .article-template .article-meta {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
 }
 
-.article-template .article-meta h1 {
-    font-size: 2.5rem;
-    line-height: 1.3;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    font-weight: bold;
+/* Hero Card with Background Image */
+.article-template .article-meta {
+    background: var(--card-bg);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.article-template .article-meta:hover {
+    box-shadow: 0 15px 60px rgba(157, 9, 19, 0.2);
+    transform: translateY(-2px);
 }
 
 .article-template .article-image {
     width: 100%;
-    height: 300px;
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    color: white;
-    margin: 2rem 0;
+    height: 400px;
+    object-fit: cover;
+    display: block;
     position: relative;
-    overflow: hidden;
+    transition: transform 0.4s ease;
 }
 
-.article-template .article-image::before {
-    content: '';
+.article-template .article-meta:hover .article-image {
+    transform: scale(1.02);
+}
+
+.article-template .article-meta h1 {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+    font-size: 2.5rem;
+    line-height: 1.3;
+    color: white;
+    margin: 0;
+    padding: 3rem 2.5rem 2rem;
+    font-weight: bold;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.85) 40%,
+        rgba(0, 0, 0, 0.6) 70%,
+        rgba(0, 0, 0, 0.3) 85%,
+        transparent 100%
+    );
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+/* Article Category Badge */
+.article-template .article-meta::before {
+    content: attr(data-category);
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(157, 9, 19, 0.95);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Article Meta Info */
+.article-meta-info {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+.article-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.article-meta-item svg {
+    width: 18px;
+    height: 18px;
+    color: var(--primary-color);
+}
+
+.article-meta-item strong {
+    color: var(--text-primary);
+    margin-right: 0.25rem;
 }
 
 /* Section Number Styling with Hover Effect */
@@ -130,18 +200,46 @@
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .article-template {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .article-template {
         padding: 1rem;
     }
     
-    .article-template .article-meta h1 {
-        font-size: 2rem;
+    .article-template .article-meta {
+        border-radius: 16px;
+        margin-bottom: 2rem;
+    }
+    
+    .article-template .article-meta::before {
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
     }
     
     .article-template .article-image {
-        height: 200px;
-        font-size: 3rem;
+        height: 280px;
+    }
+    
+    .article-template .article-meta h1 {
+        font-size: 1.75rem;
+        padding: 2rem 1.5rem 1.5rem;
+    }
+    
+    .article-meta-info {
+        padding: 1.25rem 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .article-meta-item {
+        font-size: 0.9rem;
     }
     
     .article-template .article-body {
@@ -154,5 +252,16 @@
     
     .article-template .article-body h3 {
         font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-template .article-image {
+        height: 220px;
+    }
+    
+    .article-template .article-meta h1 {
+        font-size: 1.5rem;
+        padding: 1.5rem 1.25rem 1.25rem;
     }
 }

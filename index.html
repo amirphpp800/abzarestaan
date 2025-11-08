@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="pwa/pwa-styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="pwa/pwa-styles.css"></noscript>
@@ -66,6 +67,17 @@
                         <a href="pages/articles.html" class="nav-item">یادداشت‌ها</a>
                         <a href="pages/podcasts.html" class="nav-item">پادکست‌ها</a>
                         <a href="pages/about.html" class="nav-item">درباره</a>
+                        <div class="header-search-wrapper">
+                            <div class="header-search-container" id="headerSearchContainer">
+                                <input type="text" class="header-search-input" id="headerSearchInput" placeholder="جستجو..." readonly>
+                                <button class="header-search-icon" id="headerSearchBtn" aria-label="جستجو">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <path d="m21 21-4.35-4.35"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
                     </nav>
                 </div>
                 <div class="header-left">
@@ -77,6 +89,46 @@
             </div>
         </div>
     </header>
+
+    <!-- Search Modal -->
+    <div class="search-overlay" id="searchOverlay"></div>
+    <div class="search-modal" id="searchModal">
+        <div class="search-header">
+            <div class="search-input-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="search-input" id="searchInput" placeholder="جستجو در مقالات، ابزارها و پادکست‌ها...">
+            </div>
+            <button class="search-close-btn" id="searchCloseBtn" aria-label="بستن">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="search-tags">
+            <div class="search-tags-title">برچسب‌های پرطرفدار:</div>
+            <div class="search-tags-list">
+                <a href="#" class="search-tag" data-tag="اینترنت">اینترنت</a>
+                <a href="#" class="search-tag" data-tag="فیلترینگ">فیلترینگ</a>
+                <a href="#" class="search-tag" data-tag="امنیت">امنیت</a>
+                <a href="#" class="search-tag" data-tag="هوش مصنوعی">هوش مصنوعی</a>
+                <a href="#" class="search-tag" data-tag="سانسور">سانسور</a>
+            </div>
+        </div>
+        <div class="search-results" id="searchResults">
+            <div class="search-empty">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <p>جستجو کنید</p>
+                <small>مقالات، ابزارها و پادکست‌ها را جستجو کنید</small>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -96,7 +148,7 @@
 
                     <a href="pages/iran-off.html" class="feature-card privacy-card" style="text-decoration: none;">
                         <div class="privacy-banner">
-                            <img src="/assets/images/globe.svg" alt="Globe" class="privacy-banner-img" loading="lazy" onerror="this.style.display='none'">
+                            <img src="assets/images/globe.svg" alt="Globe" class="privacy-banner-img" loading="lazy" onerror="this.style.display='none'">
                         </div>
                         <div class="card-content">
                             <h3>ایران در خاموشی</h3>
@@ -329,6 +381,7 @@
     <script src="js/loading.js"></script>
     <script src="js/auto-optimize.js" defer></script>
     <script src="js/components.js" defer></script>
+    <script src="js/search.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="pwa/pwa-init.js" async></script>
     <script>
@@ -375,8 +428,8 @@
                 },
                 { 
                     id: 4, 
-                    title: 'گزارش اینترنت ایران - سپتامبر ۲۰۲۴', 
-                    excerpt: 'گزارش جامع از وضعیت اینترنت در ایران در ماه سپتامبر ۲۰۲۴ و بررسی تغییرات و چالش‌های پیش رو.',
+                    title: 'رمز‌ارز جدیدترین ابزار جمهوری اسلامی برای تاب‌آوری در مقابل تحریم‌ها', 
+                    excerpt: 'بررسی نقش رمزارزها در اقتصاد ایران و چگونگی استفاده از آن برای دور زدن تحریم‌های بین‌المللی.',
                     date: '۱۵ مهر ۱۴۰۴',
                     image: 'assets/images/network.png'
                 },
